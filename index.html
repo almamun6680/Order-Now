@@ -10,7 +10,7 @@
     
     <style>
         /* =========================================
-           বেসিক রিসেট
+            বেসিক রিসেট
         ========================================= */
         :root {
             --primary: #CC0000;      
@@ -36,7 +36,7 @@
         }
 
         /* =========================================
-           হেডার সেকশন CSS (Best Selling Mart)
+            হেডার সেকশন CSS (Best Selling Mart)
         ========================================= */
         .header-container {
             display: flex;
@@ -93,7 +93,7 @@
         .search-input::placeholder { color: #00d26a; opacity: 0.8; }
 
         /* =========================================
-           অর্ডার ফর্ম CSS
+            অর্ডার ফর্ম CSS
         ========================================= */
         .main-content {
             padding: 20px 10px;
@@ -104,6 +104,15 @@
         .form-wrapper {
             width: 100%;
             max-width: 500px; /* ফর্মের সাইজ */
+        }
+
+        /* নতুন যোগ করা প্রোডাক্ট ইমেজ CSS */
+        .product-banner {
+            width: 100%;
+            border-radius: 16px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: block;
         }
 
         .header-box {
@@ -184,7 +193,7 @@
         .success-box h3 { color: #27AE60; font-size: 28px; margin-top: 15px; margin-bottom: 10px; }
 
         /* =========================================
-           রেসপন্সিভ মিডিয়া কোয়েরি
+            রেসপন্সিভ মিডিয়া কোয়েরি
         ========================================= */
         @media (max-width: 768px) {
             /* Header Responsive */
@@ -249,6 +258,8 @@
         <div class="form-wrapper">
             <div id="mainFormArea">
                 
+                <img src="images/whatsapp-image-2026-04-21-at-1-34-58-pm.jpeg" alt="Honey Combo Banner" class="product-banner">
+
                 <div class="header-box">
                     <h2>CONFIRM YOUR ORDER</h2>
                     <p>Best Selling Mart</p>
@@ -289,12 +300,6 @@
                                 <input type="radio" name="delivery" value="50" checked>
                             </label>
 
-                            <label class="delivery-box" onclick="selectBox(this, 80)">
-                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-                                <span class="box-title">ঢাকা সিটির বাহিরে</span>
-                                <span class="box-price">৮০ ৳</span>
-                                <input type="radio" name="delivery" value="80">
-                            </label>
 
                             <label class="delivery-box" onclick="selectBox(this, 100)">
                                 <div class="check-icon"><i class="fa-solid fa-check"></i></div>
@@ -308,7 +313,7 @@
                     <div class="submit-box">
                         <div class="total-row">
                             <span class="total-label">সর্বমোট বিল:</span>
-                            <span class="total-amount"><span id="finalPrice">১০৫০</span> ৳</span>
+                            <span class="total-amount"><span id="finalPrice">১২০০</span> ৳</span>
                         </div>
                         <button type="submit" id="btnSubmit" class="btn-confirm">
                             অর্ডার কনফার্ম করুন <i class="fa-solid fa-arrow-right"></i>
@@ -326,58 +331,57 @@
     </main>
 
     <script>
-        // প্রোডাক্টের বেসিক প্রাইস (যেমন: 1000 টাকা)
-const BASE_PRICE = 1000;
+        // প্রোডাক্টের বেসিক প্রাইস (যেমন: 1150 টাকা)
+        const BASE_PRICE = 1150;
 
-function convertToBangla(num) {
-    const eng = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-    const bng = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-    return num.toString().split('').map(c => eng.includes(c) ? bng[eng.indexOf(c)] : c).join('');
-}
+        function convertToBangla(num) {
+            const eng = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+            const bng = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+            return num.toString().split('').map(c => eng.includes(c) ? bng[eng.indexOf(c)] : c).join('');
+        }
 
-function selectBox(element, charge) {
-    document.querySelectorAll('.delivery-box').forEach(box => box.classList.remove('active'));
-    element.classList.add('active');
-    element.querySelector('input').checked = true;
+        function selectBox(element, charge) {
+            document.querySelectorAll('.delivery-box').forEach(box => box.classList.remove('active'));
+            element.classList.add('active');
+            element.querySelector('input').checked = true;
 
-    let total = BASE_PRICE + charge;
-    document.getElementById('finalPrice').innerText = convertToBangla(total);
-}
+            let total = BASE_PRICE + charge;
+            document.getElementById('finalPrice').innerText = convertToBangla(total);
+        }
 
-const form = document.getElementById('orderForm');
+        const form = document.getElementById('orderForm');
 
-// ⚠️ গুগল অ্যাপস স্ক্রিপ্ট থেকে কপি করা লিঙ্কটি নিচে সিঙ্গল কোটেশনের ভিতরে পেস্ট করুন
-const scriptURL = 'https://script.google.com/macros/s/AKfycbz39CSR0ZgvD5a0_6NPeN3rUx9d3uHXARTE6I6RgZmqAA6bdrJYuWwrA-m6uPw5vD0E/exec'; 
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz39CSR0ZgvD5a0_6NPeN3rUx9d3uHXARTE6I6RgZmqAA6bdrJYuWwrA-m6uPw5vD0E/exec'; 
 
-form.addEventListener('submit', e => {
-    e.preventDefault(); 
-    
-    const btn = document.getElementById('btnSubmit');
-    const originalText = btn.innerHTML;
-    
-    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> অপেক্ষা করুন...';
-    btn.disabled = true;
+        form.addEventListener('submit', e => {
+            e.preventDefault(); 
+            
+            const btn = document.getElementById('btnSubmit');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> অপেক্ষা করুন...';
+            btn.disabled = true;
 
-    let selectedCharge = parseInt(document.querySelector('input[name="delivery"]:checked').value);
-    let totalAmount = BASE_PRICE + selectedCharge;
+            let selectedCharge = parseInt(document.querySelector('input[name="delivery"]:checked').value);
+            let totalAmount = BASE_PRICE + selectedCharge;
 
-    let formData = new FormData(form);
-    formData.append('deliveryCharge', selectedCharge);
-    formData.append('totalAmount', totalAmount);
+            let formData = new FormData(form);
+            formData.append('deliveryCharge', selectedCharge);
+            formData.append('totalAmount', totalAmount);
 
-    // ডেটা গুগলে পাঠানো হচ্ছে
-    fetch(scriptURL, { method: 'POST', body: formData})
-        .then(response => {
-            document.getElementById('mainFormArea').style.display = 'none';
-            document.getElementById('successArea').style.display = 'block';
-        })
-        .catch(error => {
-            console.error('Error!', error.message);
-            btn.innerHTML = originalText;
-            btn.disabled = false;
-            alert('দুঃখিত, কোনো সমস্যা হয়েছে। আপনার ইন্টারনেট কানেকশন চেক করে আবার চেষ্টা করুন।');
+            fetch(scriptURL, { method: 'POST', body: formData})
+                .then(response => {
+                    document.getElementById('mainFormArea').style.display = 'none';
+                    document.getElementById('successArea').style.display = 'block';
+                    window.scrollTo(0,0); // সফল হলে স্ক্রল উপরে নিয়ে যাবে
+                })
+                .catch(error => {
+                    console.error('Error!', error.message);
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    alert('দুঃখিত, কোনো সমস্যা হয়েছে। আপনার ইন্টারনেট কানেকশন চেক করে আবার চেষ্টা করুন।');
+                });
         });
-});
     </script>
 
 </body>
