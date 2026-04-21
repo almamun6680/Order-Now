@@ -1,412 +1,384 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Box Style Order Form - Red Header</title>
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-    :root {
-        --primary: #CC0000;      
-        --primary-light: #FFE5E5;
-        --secondary: #FFD700;    
-        --bg-main: #F4F7F6;      
-        --box-bg: #FFFFFF;
-        --text-dark: #1A1A1A;
-        --text-gray: #666666;
-        --border-color: #E5E5E5;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Best Selling Mart - Order Form</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =========================================
+           বেসিক রিসেট
+        ========================================= */
+        :root {
+            --primary: #CC0000;      
+            --primary-light: #FFE5E5;
+            --secondary: #FFD700;    
+            --bg-main: #F4F7F6;      
+            --box-bg: #FFFFFF;
+            --text-dark: #1A1A1A;
+            --text-gray: #666666;
+            --border-color: #E5E5E5;
+        }
 
-    * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: 'Hind Siliguri', sans-serif;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Hind Siliguri', 'Arial', sans-serif;
+        }
 
-    body {
-        background-color: transparent;
-        display: flex;
-        justify-content: center;
-        padding: 10px;
-    }
+        body {
+            background-color: var(--bg-main);
+            display: block; /* হেডারের জন্য ব্লক ডিসপ্লে */
+        }
 
-    .form-wrapper {
-        width: 100%;
-        max-width: 480px;
-    }
+        /* =========================================
+           হেডার সেকশন CSS (Best Selling Mart)
+        ========================================= */
+        .header-container {
+            display: flex;
+            flex-wrap: wrap; 
+            align-items: center;
+            justify-content: space-between;
+            background-color: #023015;
+            padding: 15px 5%; 
+            gap: 15px;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
 
-    /* Updated Red Header Box */
-    .header-box {
-        background: linear-gradient(135deg, #CC0000, #990000); /* প্রিমিয়াম লাল ব্যাকগ্রাউন্ড */
-        padding: 25px 20px;
-        border-radius: 16px;
-        text-align: center;
-        margin-bottom: 15px;
-        box-shadow: 0 8px 20px rgba(204, 0, 0, 0.25);
-        border: none;
-    }
+        .header-left { flex: 1; display: flex; justify-content: flex-start; }
+        .header-center { flex: 1; display: flex; justify-content: center; }
+        .header-right { flex: 1; display: flex; justify-content: flex-end; }
 
-    .header-box h2 {
-        color: #FFFFFF; /* লালের উপর সাদা টেক্সট */
-        font-size: 26px;
-        font-weight: 700;
-        margin-bottom: 5px;
-        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    }
+        .actions-left { gap: 30px; }
+        .action-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
+        .action-item i { font-size: 24px; color: white; transition: 0.3s ease; }
+        .action-item:hover i { color: #00d26a; }
 
-    .header-box p {
-        color: var(--secondary); /* লালের উপর উজ্জ্বল সোনালী টেক্সট */
-        font-size: 14px;
-        font-weight: 600;
-        letter-spacing: 1.5px;
-        text-transform: uppercase;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    }
+        .icon-wrapper { position: relative; }
+        .cart-badge {
+            position: absolute; top: -8px; right: -10px;
+            background-color: #ff3b30; color: white;
+            font-size: 12px; font-weight: bold;
+            height: 18px; width: 18px;
+            display: flex; justify-content: center; align-items: center;
+            border-radius: 50%;
+        }
 
-    /* Section Boxes */
-    .section-box {
-        background: var(--box-bg);
-        padding: 20px;
-        border-radius: 16px;
-        margin-bottom: 15px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        border: 1px solid var(--border-color);
-    }
+        .action-text { font-size: 16px; font-weight: 500; }
+        .action-text-multi { display: flex; flex-direction: column; font-size: 12px; font-weight: 500; line-height: 1.2; }
 
-    .section-title {
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--text-dark);
-        margin-bottom: 15px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
+        .logo-section { gap: 10px; cursor: pointer; }
+        .logo-icon {
+            background-color: white; height: 40px; width: 40px;
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+        }
+        .logo-icon i { color: #023015; font-size: 18px; }
+        
+        .logo-text { display: flex; flex-direction: column; }
+        .brand-name { color: #00d26a; font-size: 22px; font-weight: 900; letter-spacing: 1px; line-height: 1; }
+        .tagline { color: white; font-size: 10px; letter-spacing: 3px; margin-top: 2px; }
 
-    /* Input Boxes */
-    .input-wrapper {
-        margin-bottom: 15px;
-    }
+        .search-section {
+            display: flex; align-items: center;
+            background-color: #01180b; padding: 10px 20px;
+            border-radius: 5px; width: 100%; max-width: 350px; 
+        }
+        .search-icon { color: #00d26a; font-size: 18px; margin-right: 10px; }
+        .search-input { background: transparent; border: none; outline: none; color: #00d26a; font-size: 16px; width: 100%; }
+        .search-input::placeholder { color: #00d26a; opacity: 0.8; }
 
-    .input-wrapper label {
-        display: block;
-        font-size: 14px;
-        color: var(--text-gray);
-        margin-bottom: 5px;
-        font-weight: 600;
-    }
+        /* =========================================
+           অর্ডার ফর্ম CSS
+        ========================================= */
+        .main-content {
+            padding: 20px 10px;
+            display: flex;
+            justify-content: center;
+        }
 
-    .input-wrapper input,
-    .input-wrapper textarea {
-        width: 100%;
-        padding: 14px;
-        background: #F9FAFB;
-        border: 2px solid #F3F4F6;
-        border-radius: 10px;
-        font-size: 15px;
-        color: var(--text-dark);
-        transition: all 0.3s ease;
-    }
+        .form-wrapper {
+            width: 100%;
+            max-width: 500px; /* ফর্মের সাইজ */
+        }
 
-    .input-wrapper textarea {
-        height: 80px;
-        resize: none;
-    }
+        .header-box {
+            background: linear-gradient(135deg, #CC0000, #990000);
+            padding: 25px 20px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(204, 0, 0, 0.25);
+        }
 
-    .input-wrapper input:focus,
-    .input-wrapper textarea:focus {
-        background: var(--box-bg);
-        border-color: var(--primary);
-        outline: none;
-        box-shadow: 0 0 0 4px var(--primary-light);
-    }
+        .header-box h2 { color: #FFFFFF; font-size: 26px; font-weight: 700; margin-bottom: 5px; }
+        .header-box p { color: var(--secondary); font-size: 16px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
 
-    /* Delivery Options (Grid) */
-    .delivery-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-        gap: 12px;
-    }
+        .section-box {
+            background: var(--box-bg);
+            padding: 20px; border-radius: 16px; margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
+        }
 
-    .delivery-box {
-        position: relative;
-        background: var(--box-bg);
-        border: 2px solid var(--border-color);
-        border-radius: 12px;
-        padding: 15px 10px;
-        text-align: center;
-        cursor: pointer;
-        transition: all 0.3s ease;
-    }
+        .section-title { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
 
-    .delivery-box input[type="radio"] {
-        display: none;
-    }
+        .input-wrapper { margin-bottom: 15px; }
+        .input-wrapper label { display: block; font-size: 15px; color: var(--text-gray); margin-bottom: 5px; font-weight: 600; }
+        .input-wrapper input, .input-wrapper textarea {
+            width: 100%; padding: 14px; background: #F9FAFB;
+            border: 2px solid #F3F4F6; border-radius: 10px; font-size: 15px;
+            color: var(--text-dark); transition: all 0.3s ease;
+        }
+        .input-wrapper textarea { height: 80px; resize: none; }
+        .input-wrapper input:focus, .input-wrapper textarea:focus {
+            background: var(--box-bg); border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px var(--primary-light);
+        }
 
-    .delivery-box:hover {
-        border-color: var(--secondary);
-        background: #FFFAF0;
-    }
+        /* Delivery Options (3 Columns) */
+        .delivery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* ৩টি অপশনের জন্য */
+            gap: 10px;
+        }
 
-    .delivery-box.active {
-        border-color: var(--primary);
-        background: var(--primary-light);
-    }
+        .delivery-box {
+            position: relative; background: var(--box-bg); border: 2px solid var(--border-color);
+            border-radius: 12px; padding: 15px 5px; text-align: center; cursor: pointer; transition: all 0.3s ease;
+        }
+        .delivery-box input[type="radio"] { display: none; }
+        .delivery-box:hover { border-color: var(--secondary); background: #FFFAF0; }
+        .delivery-box.active { border-color: var(--primary); background: var(--primary-light); }
 
-    /* Active Checkmark */
-    .check-icon {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        width: 20px;
-        height: 20px;
-        background: var(--primary);
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        opacity: 0;
-        transform: scale(0);
-        transition: all 0.3s ease;
-    }
+        .check-icon {
+            position: absolute; top: 5px; right: 5px; width: 18px; height: 18px;
+            background: var(--primary); color: white; border-radius: 50%; display: flex;
+            align-items: center; justify-content: center; font-size: 10px; opacity: 0;
+            transform: scale(0); transition: all 0.3s ease;
+        }
+        .delivery-box.active .check-icon { opacity: 1; transform: scale(1); }
 
-    .delivery-box.active .check-icon {
-        opacity: 1;
-        transform: scale(1);
-    }
+        .box-title { display: block; font-size: 13px; font-weight: 600; color: var(--text-dark); margin-top: 5px; margin-bottom: 5px; }
+        .box-price { display: inline-block; font-size: 15px; font-weight: 700; color: var(--primary); background: var(--box-bg); padding: 2px 8px; border-radius: 20px; border: 1px solid var(--primary-light); }
 
-    .box-title {
-        display: block;
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--text-dark);
-        margin-bottom: 5px;
-        margin-top: 5px;
-    }
+        .submit-box { background: var(--box-bg); padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); }
+        .total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px dashed var(--border-color); }
+        .total-label { font-size: 18px; color: var(--text-gray); font-weight: 600; }
+        .total-amount { font-size: 24px; color: var(--primary); font-weight: 700; }
 
-    .box-price {
-        display: inline-block;
-        font-size: 16px;
-        font-weight: 700;
-        color: var(--primary);
-        background: var(--box-bg);
-        padding: 2px 10px;
-        border-radius: 20px;
-        border: 1px solid var(--primary-light);
-    }
+        .btn-confirm {
+            width: 100%; padding: 16px; background: var(--primary); color: white; border: none;
+            border-radius: 10px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s;
+        }
+        .btn-confirm:hover { background: #A30000; }
 
-    /* Submit Button Box */
-    .submit-box {
-        background: var(--box-bg);
-        padding: 20px;
-        border-radius: 16px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-        border: 1px solid var(--border-color);
-    }
+        /* Success Message Box */
+        .success-box {
+            display: none; background: var(--box-bg); padding: 50px 20px;
+            border-radius: 16px; text-align: center; border: 2px solid #27AE60;
+            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.1); margin-top: 20px;
+        }
+        .success-box h3 { color: #27AE60; font-size: 28px; margin-top: 15px; margin-bottom: 10px; }
 
-    .total-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 15px;
-        padding-bottom: 15px;
-        border-bottom: 2px dashed var(--border-color);
-    }
+        /* =========================================
+           রেসপন্সিভ মিডিয়া কোয়েরি
+        ========================================= */
+        @media (max-width: 768px) {
+            /* Header Responsive */
+            .header-container { padding: 15px 20px; }
+            .header-center { order: 1; flex: auto; justify-content: flex-start; }
+            .header-left { order: 2; flex: auto; justify-content: flex-end; }
+            .header-right { order: 3; flex: 100%; justify-content: center; margin-top: 10px; }
+            .search-section { max-width: 100%; }
+            .action-text, .action-text-multi { display: none; }
+            .logo-icon { height: 35px; width: 35px; }
+            .logo-icon i { font-size: 16px; }
+            
+            /* Form Responsive */
+            .delivery-grid { grid-template-columns: 1fr; /* মোবাইলে অপশনগুলো নিচে নিচে আসবে */ }
+        }
 
-    .total-label {
-        font-size: 16px;
-        color: var(--text-gray);
-        font-weight: 600;
-    }
-
-    .total-amount {
-        font-size: 22px;
-        color: var(--primary);
-        font-weight: 700;
-    }
-
-    .btn-confirm {
-        width: 100%;
-        padding: 16px;
-        background: var(--primary);
-        color: white;
-        border: none;
-        border-radius: 10px;
-        font-size: 18px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: all 0.3s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .btn-confirm:hover {
-        background: #A30000;
-    }
-
-    /* Success Box */
-    .success-box {
-        display: none;
-        background: var(--box-bg);
-        padding: 40px 20px;
-        border-radius: 16px;
-        text-align: center;
-        border: 2px solid #27AE60;
-        box-shadow: 0 10px 30px rgba(39, 174, 96, 0.1);
-    }
-
-    .success-box h3 {
-        color: #27AE60;
-        font-size: 24px;
-        margin-top: 15px;
-        margin-bottom: 10px;
-    }
-</style>
+        @media (max-width: 480px) {
+            .brand-name { font-size: 18px; }
+            .tagline { font-size: 8px; letter-spacing: 2px; }
+        }
+    </style>
 </head>
 <body>
 
-<div class="form-wrapper">
-    <div id="mainFormArea">
-        <div class="header-box">
-            <h2> CONFIRM YOUR ORDER</h2>
-            <p> Best Selling Mart</p>
+    <header class="header-container">
+        <div class="header-left actions-left">
+            <div class="action-item">
+                <div class="icon-wrapper">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span class="cart-badge">0</span>
+                </div>
+                <span class="action-text">Cart</span>
+            </div>
+            <div class="action-item">
+                <i class="fa-solid fa-map-location-dot"></i>
+                <div class="action-text-multi">
+                    <span>Order</span>
+                    <span>Track</span>
+                </div>
+            </div>
         </div>
 
-        <form id="orderForm">
-            <div class="section-box">
-                <div class="section-title">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-                    ডেলিভারি ঠিকানা
-                </div>
+        <div class="header-center logo-section">
+            <div class="logo-icon">
+                <i class="fa-solid fa-shop"></i> 
+            </div>
+            <div class="logo-text">
+                <div class="brand-name">BEST SELLING MART</div>
+                <div class="tagline">PREMIUM QUALITY</div>
+            </div>
+        </div>
+
+        <div class="header-right">
+            <div class="search-section">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" placeholder="Search in Best Selling Mart..." class="search-input">
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="form-wrapper">
+            <div id="mainFormArea">
                 
-                <div class="input-wrapper">
-                    <label>আপনার নাম</label>
-                    <input type="text" name="name" placeholder="সম্পূর্ণ নাম লিখুন" required>
+                <div class="header-box">
+                    <h2>CONFIRM YOUR ORDER</h2>
+                    <p>Best Selling Mart</p>
                 </div>
-                
-                <div class="input-wrapper">
-                    <label>মোবাইল নাম্বার</label>
-                    <input type="tel" name="mobile" placeholder="০১৭XXXXXXXX" required>
-                </div>
-                
-                <div class="input-wrapper" style="margin-bottom: 0;">
-                    <label>বিস্তারিত ঠিকানা</label>
-                    <textarea name="address" placeholder="গ্রাম/মহল্লা, থানা, জেলা" required></textarea>
-                </div>
+
+                <form id="orderForm">
+                    <div class="section-box">
+                        <div class="section-title">
+                            <i class="fa-solid fa-user-check"></i> ডেলিভারি তথ্য দিন
+                        </div>
+                        
+                        <div class="input-wrapper">
+                            <label>আপনার নাম</label>
+                            <input type="text" name="name" placeholder="সম্পূর্ণ নাম লিখুন" required>
+                        </div>
+                        
+                        <div class="input-wrapper">
+                            <label>মোবাইল নাম্বার</label>
+                            <input type="tel" name="mobile" placeholder="০১৭XXXXXXXX" required>
+                        </div>
+                        
+                        <div class="input-wrapper" style="margin-bottom: 0;">
+                            <label>বিস্তারিত ঠিকানা</label>
+                            <textarea name="address" placeholder="গ্রাম/মহল্লা, থানা, জেলা" required></textarea>
+                        </div>
+                    </div>
+
+                    <div class="section-box">
+                        <div class="section-title">
+                            <i class="fa-solid fa-truck-fast"></i> ডেলিভারি এলাকা নির্বাচন করুন
+                        </div>
+
+                        <div class="delivery-grid">
+                            <label class="delivery-box active" onclick="selectBox(this, 50)">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <span class="box-title">ঢাকা সিটির ভিতরে</span>
+                                <span class="box-price">৫০ ৳</span>
+                                <input type="radio" name="delivery" value="50" checked>
+                            </label>
+
+                            <label class="delivery-box" onclick="selectBox(this, 80)">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <span class="box-title">ঢাকা সিটির বাহিরে</span>
+                                <span class="box-price">৮০ ৳</span>
+                                <input type="radio" name="delivery" value="80">
+                            </label>
+
+                            <label class="delivery-box" onclick="selectBox(this, 100)">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <span class="box-title">ঢাকা জেলার বাহিরে</span>
+                                <span class="box-price">১০০ ৳</span>
+                                <input type="radio" name="delivery" value="100">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="submit-box">
+                        <div class="total-row">
+                            <span class="total-label">সর্বমোট বিল:</span>
+                            <span class="total-amount"><span id="finalPrice">১০৫০</span> ৳</span>
+                        </div>
+                        <button type="submit" id="btnSubmit" class="btn-confirm">
+                            অর্ডার কনফার্ম করুন <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
 
-            <div class="section-box">
-                <div class="section-title">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-                    ডেলিভারি এলাকা
-                </div>
-
-                <div class="delivery-grid">
-                    <label class="delivery-box active" onclick="selectBox(this, 50)">
-                        <div class="check-icon">✓</div>
-                        <span class="box-title">ঢাকা সিটির ভিতরে</span>
-                        <span class="box-price">৫০ ৳</span>
-                        <input type="radio" name="delivery" value="50" checked>
-                    </label>
-                    
-
-                        <label class="delivery-box" onclick="selectBox(this, 100)">
-                        <div class="check-icon">✓</div>
-                        <span class="box-title">ঢাকা জেলার বাহিরে</span>
-                        <span class="box-price">১০০ ৳</span>
-                        <input type="radio" name="delivery" value="100">
-                    </label>
-                </div>
+            <div id="successArea" class="success-box">
+                <i class="fa-regular fa-circle-check" style="font-size: 60px; color: #27AE60;"></i>
+                <h3>অর্ডার সম্পন্ন!</h3>
+                <p style="color: #666; font-size: 16px;">ধন্যবাদ। আমরা আপনার অর্ডারটি সফলভাবে রিসিভ করেছি। খুব শীঘ্রই আপনার সাথে যোগাযোগ করা হবে।</p>
             </div>
+        </div>
+    </main>
 
-            <div class="submit-box">
-                <div class="total-row">
-                    <span class="total-label">সর্বমোট বিল:</span>
-                    <span class="total-amount"><span id="finalPrice">১০৫০</span> ৳</span>
-                </div>
-                <button type="submit" id="btnSubmit" class="btn-confirm">
-                    অর্ডার কনফার্ম করুন
-                </button>
-                <br>
-                
-                
-            </div>
-        </form>
-    </div>
+    <script>
+        // প্রোডাক্টের বেসিক প্রাইস (যেমন: 1000 টাকা)
+const BASE_PRICE = 1000;
 
-    <div id="successArea" class="success-box">
-        <svg width="60" height="60" fill="none" stroke="#27AE60" stroke-width="2" viewBox="0 0 24 24" style="margin: 0 auto;"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-        <h3>অর্ডার সম্পন্ন!</h3>
-        <p style="color: #666;">ধন্যবাদ। আমরা আপনার অর্ডারটি রিসিভ করেছি। খুব শীঘ্রই যোগাযোগ করা হবে।</p>
-    </div>
-</div>
+function convertToBangla(num) {
+    const eng = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const bng = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
+    return num.toString().split('').map(c => eng.includes(c) ? bng[eng.indexOf(c)] : c).join('');
+}
 
-<script>
-    // আপনার প্রোডাক্টের প্রাইস (যেমন: 1000 টাকা)
-    const BASE_PRICE = 1000;
+function selectBox(element, charge) {
+    document.querySelectorAll('.delivery-box').forEach(box => box.classList.remove('active'));
+    element.classList.add('active');
+    element.querySelector('input').checked = true;
 
-    // ইংরেজি থেকে বাংলা নাম্বার
-    function convertToBangla(num) {
-        const eng = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-        const bng = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-        return num.toString().split('').map(c => eng.includes(c) ? bng[eng.indexOf(c)] : c).join('');
-    }
+    let total = BASE_PRICE + charge;
+    document.getElementById('finalPrice').innerText = convertToBangla(total);
+}
 
-    // বক্স সিলেক্ট করার ফাংশন
-    function selectBox(element, charge) {
-        // সব বক্স থেকে active রিমুভ
-        document.querySelectorAll('.delivery-box').forEach(box => {
-            box.classList.remove('active');
-        });
-        // বর্তমান বক্সে active অ্যাড
-        element.classList.add('active');
-        element.querySelector('input').checked = true;
+const form = document.getElementById('orderForm');
 
-        // টোটাল আপডেট
-        let total = BASE_PRICE + charge;
-        document.getElementById('finalPrice').innerText = convertToBangla(total);
-    }
+// ⚠️ গুগল অ্যাপস স্ক্রিপ্ট থেকে কপি করা লিঙ্কটি নিচে সিঙ্গল কোটেশনের ভিতরে পেস্ট করুন
+const scriptURL = 'https://script.google.com/macros/s/AKfycbz39CSR0ZgvD5a0_6NPeN3rUx9d3uHXARTE6I6RgZmqAA6bdrJYuWwrA-m6uPw5vD0E/exec'; 
 
-    // ফর্ম সাবমিট
-    const form = document.getElementById('orderForm');
+form.addEventListener('submit', e => {
+    e.preventDefault(); 
     
-    // ⚠️ আপনার গুগল স্ক্রিপ্টের লিঙ্কটি (Web App URL) নিচে বসান
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbzz3tV1rcuebYKHiI-FUtZo7Y4nu_9Iy-ajICFUuSIgkdW3Bj6WpmSByp0avU2HCFI/exec'; 
+    const btn = document.getElementById('btnSubmit');
+    const originalText = btn.innerHTML;
+    
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> অপেক্ষা করুন...';
+    btn.disabled = true;
 
-    form.addEventListener('submit', e => {
-        e.preventDefault();
-        
-        const btn = document.getElementById('btnSubmit');
-        const originalText = btn.innerHTML;
-        
-        btn.innerHTML = 'অপেক্ষা করুন...';
-        btn.disabled = true;
+    let selectedCharge = parseInt(document.querySelector('input[name="delivery"]:checked').value);
+    let totalAmount = BASE_PRICE + selectedCharge;
 
-        let selectedCharge = parseInt(document.querySelector('input[name="delivery"]:checked').value);
-        let totalAmount = BASE_PRICE + selectedCharge;
+    let formData = new FormData(form);
+    formData.append('deliveryCharge', selectedCharge);
+    formData.append('totalAmount', totalAmount);
 
-        let formData = new FormData(form);
-        formData.append('deliveryCharge', selectedCharge);
-        formData.append('totalAmount', totalAmount);
-
-        fetch(scriptURL, { method: 'POST', body: formData})
-            .then(response => {
-                document.getElementById('mainFormArea').style.display = 'none';
-                document.getElementById('successArea').style.display = 'block';
-            })
-            .catch(error => {
-                console.error('Error!', error.message);
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-                alert('দুঃখিত, কোনো সমস্যা হয়েছে। আবার চেষ্টা করুন।');
-            });
-    });
-</script>
+    // ডেটা গুগলে পাঠানো হচ্ছে
+    fetch(scriptURL, { method: 'POST', body: formData})
+        .then(response => {
+            document.getElementById('mainFormArea').style.display = 'none';
+            document.getElementById('successArea').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+            alert('দুঃখিত, কোনো সমস্যা হয়েছে। আপনার ইন্টারনেট কানেকশন চেক করে আবার চেষ্টা করুন।');
+        });
+});
+    </script>
 
 </body>
 </html>
