@@ -32,11 +32,11 @@
 
         body {
             background-color: var(--bg-main);
-            display: block; /* হেডারের জন্য ব্লক ডিসপ্লে */
+            display: block; 
         }
 
         /* =========================================
-            হেডার সেকশন CSS (Best Selling Mart)
+            হেডার সেকশন CSS
         ========================================= */
         .header-container {
             display: flex;
@@ -103,17 +103,159 @@
 
         .form-wrapper {
             width: 100%;
-            max-width: 500px; /* ফর্মের সাইজ */
+            max-width: 500px; 
         }
 
-        /* নতুন যোগ করা প্রোডাক্ট ইমেজ CSS */
-        .product-banner {
+        /* =========================================
+            নতুন ইমেজ স্লাইডার (Carousel) CSS
+        ========================================= */
+        .slider-container {
+            position: relative;
             width: 100%;
             border-radius: 16px;
             margin-bottom: 15px;
+            overflow: hidden;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.4s ease-in-out;
+            width: 100%;
+        }
+
+        .slide-img {
+            min-width: 100%;
+            height: auto;
+            object-fit: cover;
             display: block;
         }
+
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #CC0000;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+            transition: 0.3s;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .slider-btn:hover {
+            background-color: #CC0000;
+            color: white;
+        }
+
+        .prev-btn { left: 10px; }
+        .next-btn { right: 10px; }
+
+        /* =========================================
+            প্রোডাক্ট ডেসক্রিপশন CSS
+        ========================================= */
+        .product-description-box {
+            background: var(--box-bg);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            text-align: center; 
+        }
+
+        .price-highlight {
+            color: var(--primary);
+            font-size: 20px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+            background: var(--primary-light);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px dashed var(--primary);
+        }
+
+        .package-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            gap: 8px;
+        }
+
+        .package-list {
+            list-style: none;
+            margin-bottom: 15px;
+            padding: 0; 
+            display: inline-block; 
+            text-align: left; 
+            max-width: 100%;
+        }
+
+        .package-list li {
+            font-size: 15px;
+            color: var(--text-gray);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start; 
+            gap: 10px;
+            font-weight: 500;
+            word-wrap: break-word; 
+        }
+
+        .package-list li i {
+            color: #27AE60;
+            font-size: 14px;
+            margin-top: 4px; 
+        }
+
+        .urgency-text {
+            color: #D35400;
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+            background: #FDF2E9;
+            padding: 8px;
+            border-radius: 5px;
+        }
+
+        .btn-scroll-order {
+            width: 100%;
+            padding: 16px;
+            background: #27AE60;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-scroll-order:hover {
+            background: #219653;
+            transform: translateY(-2px);
+        }
+
+        /* ========================================= */
 
         .header-box {
             background: linear-gradient(135deg, #CC0000, #990000);
@@ -147,10 +289,10 @@
             background: var(--box-bg); border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px var(--primary-light);
         }
 
-        /* Delivery Options (3 Columns) */
+        /* Delivery Options Updated */
         .delivery-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr); /* ৩টি অপশনের জন্য */
+            grid-template-columns: 1fr; /* একটি মাত্র অপশনের জন্য ফুল উইডথ */
             gap: 10px;
         }
 
@@ -170,7 +312,7 @@
         }
         .delivery-box.active .check-icon { opacity: 1; transform: scale(1); }
 
-        .box-title { display: block; font-size: 13px; font-weight: 600; color: var(--text-dark); margin-top: 5px; margin-bottom: 5px; }
+        .box-title { display: block; font-size: 14px; font-weight: 600; color: var(--text-dark); margin-top: 5px; margin-bottom: 5px; }
         .box-price { display: inline-block; font-size: 15px; font-weight: 700; color: var(--primary); background: var(--box-bg); padding: 2px 8px; border-radius: 20px; border: 1px solid var(--primary-light); }
 
         .submit-box { background: var(--box-bg); padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); }
@@ -196,7 +338,6 @@
             রেসপন্সিভ মিডিয়া কোয়েরি
         ========================================= */
         @media (max-width: 768px) {
-            /* Header Responsive */
             .header-container { padding: 15px 20px; }
             .header-center { order: 1; flex: auto; justify-content: flex-start; }
             .header-left { order: 2; flex: auto; justify-content: flex-end; }
@@ -205,9 +346,6 @@
             .action-text, .action-text-multi { display: none; }
             .logo-icon { height: 35px; width: 35px; }
             .logo-icon i { font-size: 16px; }
-            
-            /* Form Responsive */
-            .delivery-grid { grid-template-columns: 1fr; /* মোবাইলে অপশনগুলো নিচে নিচে আসবে */ }
         }
 
         @media (max-width: 480px) {
@@ -258,9 +396,43 @@
         <div class="form-wrapper">
             <div id="mainFormArea">
                 
-                <img src="images/honey.jpeg" alt="Honey Combo Banner" class="product-banner">
+                <div class="slider-container">
+                    <div class="slider-track" id="sliderTrack">
+                        <img src="img/Fighter1.PNG" alt="Product Image 1" class="slide-img">
+                        <img src="img/Fighter2.PNG" alt="Product Image 2" class="slide-img">
+                        <img src="img/Fighter3.PNG" alt="Product Image 3" class="slide-img">
+                        <img src="img/Fighter4.PNG" alt="Product Image 4" class="slide-img">
+                    </div>
+                    
+                    <button class="slider-btn prev-btn" onclick="moveSlide(-1)">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button class="slider-btn next-btn" onclick="moveSlide(1)">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
 
-                <div class="header-box">
+                <div class="product-description-box">
+                    <div class="price-highlight">সেরা দাম: ১১৫০ টাকা মাত্র!</div>
+                    
+                    <div class="package-title"><i class="fa-solid fa-box-open"></i> প্যাকেজে যা যা থাকছে:</div>
+                    <ul class="package-list">
+                        <li><i class="fa-solid fa-circle-check"></i> হাই-স্পিড ড্রোন</li>
+                        <li><i class="fa-solid fa-circle-check"></i> রিমোট কন্ট্রোল</li>
+                        <li><i class="fa-solid fa-circle-check"></i> রিচার্জেবল ব্যাটারি</li>
+                        <li><i class="fa-solid fa-circle-check"></i> USB চার্জিং ক্যাবল</li>
+                        <li><i class="fa-solid fa-circle-check"></i> ৪টি অতিরিক্ত প্রপেলার</li>
+                        <li><i class="fa-solid fa-circle-check"></i> স্ক্রু-ড্রাইভার</li>
+                    </ul>
+
+                    <div class="urgency-text"><i class="fa-solid fa-bolt"></i> দ্রুত অর্ডার করুন! সীমিত সময়ের অফার।</div>
+
+                    <button type="button" class="btn-scroll-order" onclick="scrollToOrderForm()">
+                        <i class="fa-solid fa-cart-arrow-down"></i> এখনই অর্ডার করুন
+                    </button>
+                </div>
+
+                <div class="header-box" id="orderFormSection">
                     <h2>CONFIRM YOUR ORDER</h2>
                     <p>Best Selling Mart</p>
                 </div>
@@ -289,23 +461,15 @@
 
                     <div class="section-box">
                         <div class="section-title">
-                            <i class="fa-solid fa-truck-fast"></i> ডেলিভারি এলাকা নির্বাচন করুন
+                            <i class="fa-solid fa-truck-fast"></i> ডেলিভারি চার্জ
                         </div>
 
                         <div class="delivery-grid">
-                            <label class="delivery-box active" onclick="selectBox(this, 50)">
+                            <label class="delivery-box active" onclick="selectBox(this, 130)">
                                 <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-                                <span class="box-title">ঢাকা সিটির ভিতরে</span>
-                                <span class="box-price">৫০ ৳</span>
-                                <input type="radio" name="delivery" value="50" checked>
-                            </label>
-
-                        
-                            <label class="delivery-box" onclick="selectBox(this, 100)">
-                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-                                <span class="box-title">ঢাকা জেলার বাহিরে</span>
-                                <span class="box-price">১০০ ৳</span>
-                                <input type="radio" name="delivery" value="100">
+                                <span class="box-title">সারাদেশে ডেলিভারি চার্জ মাত্র!</span>
+                                <span class="box-price">১৩০ ৳</span>
+                                <input type="radio" name="delivery" value="130" checked>
                             </label>
                         </div>
                     </div>
@@ -313,7 +477,7 @@
                     <div class="submit-box">
                         <div class="total-row">
                             <span class="total-label">সর্বমোট বিল:</span>
-                            <span class="total-amount"><span id="finalPrice">১২০০</span> ৳</span>
+                            <span class="total-amount"><span id="finalPrice">১২৮0</span> ৳</span>
                         </div>
                         <button type="submit" id="btnSubmit" class="btn-confirm">
                             অর্ডার কনফার্ম করুন <i class="fa-solid fa-arrow-right"></i>
@@ -331,7 +495,39 @@
     </main>
 
     <script>
-        // প্রোডাক্টের বেসিক প্রাইস (যেমন: 1150 টাকা)
+        // =========================================
+        // স্লাইডার (Image Slider) এর জাভাস্ক্রিপ্ট
+        // =========================================
+        let currentSlideIndex = 0;
+        const sliderTrack = document.getElementById('sliderTrack');
+        const slides = document.querySelectorAll('.slide-img');
+        const totalSlides = slides.length;
+
+        function moveSlide(direction) {
+            currentSlideIndex += direction;
+
+            if (currentSlideIndex >= totalSlides) {
+                currentSlideIndex = 0;
+            }
+            if (currentSlideIndex < 0) {
+                currentSlideIndex = totalSlides - 1;
+            }
+
+            const translateX = -(currentSlideIndex * 100);
+            sliderTrack.style.transform = `translateX(${translateX}%)`;
+        }
+
+        // =========================================
+        // স্ক্রল টু অর্ডার ফর্ম ফাংশন
+        // =========================================
+        function scrollToOrderForm() {
+            const formSection = document.getElementById('orderFormSection');
+            formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // =========================================
+        // ফর্ম ও অন্যান্য জাভাস্ক্রিপ্ট
+        // =========================================
         const BASE_PRICE = 1150;
 
         function convertToBangla(num) {
@@ -350,7 +546,6 @@
         }
 
         const form = document.getElementById('orderForm');
-
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz39CSR0ZgvD5a0_6NPeN3rUx9d3uHXARTE6I6RgZmqAA6bdrJYuWwrA-m6uPw5vD0E/exec'; 
 
         form.addEventListener('submit', e => {
@@ -373,7 +568,7 @@
                 .then(response => {
                     document.getElementById('mainFormArea').style.display = 'none';
                     document.getElementById('successArea').style.display = 'block';
-                    window.scrollTo(0,0); // সফল হলে স্ক্রল উপরে নিয়ে যাবে
+                    window.scrollTo(0,0);
                 })
                 .catch(error => {
                     console.error('Error!', error.message);
