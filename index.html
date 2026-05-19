@@ -1,583 +1,1340 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="bn">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Best Selling Mart - Order Form</title>
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* =========================================
-            বেসিক রিসেট
-        ========================================= */
-        :root {
-            --primary: #CC0000;      
-            --primary-light: #FFE5E5;
-            --secondary: #FFD700;    
-            --bg-main: #F4F7F6;      
-            --box-bg: #FFFFFF;
-            --text-dark: #1A1A1A;
-            --text-gray: #666666;
-            --border-color: #E5E5E5;
-        }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Best Selling Mart - Order Form</title>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Hind Siliguri', 'Arial', sans-serif;
-        }
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-        body {
-            background-color: var(--bg-main);
-            display: block; 
-        }
+        <style>
+            /* =========================================
+            বেসিক রিসেট ও ভেরিয়েবলস
+            ========================================= */
+            :root {
+                --primary: #cc0000;
+                --primary-light: #ffe5e5;
+                --secondary: #ffd700;
+                --bg-main: #f4f7f6;
+                --box-bg: #ffffff;
+                --text-dark: #1a1a1a;
+                --text-gray: #666666;
+                --border-color: #e5e5e5;
+                --header-bg: #023015;
+                --header-bg-light: #054d24;
+                --success: #27ae60;
+                --success-hover: #219653;
+            }
 
-        /* =========================================
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: "Hind Siliguri", "Arial", sans-serif;
+            }
+
+            body {
+                background-color: var(--bg-main);
+                display: block;
+                padding-top: 155px; /* পিসির জন্য ডিফল্ট স্পেসিং */
+            }
+
+            /* =========================================
+            ফিক্সড/স্টিকি হেডার এবং হিরো সেকশন wrapper
+            ========================================= */
+            .sticky-header-wrapper {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                z-index: 999;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            }
+
+            /* =========================================
             হেডার সেকশন CSS
-        ========================================= */
-        .header-container {
-            display: flex;
-            flex-wrap: wrap; 
-            align-items: center;
-            justify-content: space-between;
-            background-color: #023015;
-            padding: 15px 5%; 
-            gap: 15px;
-            color: white;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        }
+            ========================================= */
+            .header-container {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background-color: var(--header-bg);
+                padding: 15px 5%;
+                color: white;
+                position: relative;
+            }
 
-        .header-left { flex: 1; display: flex; justify-content: flex-start; }
-        .header-center { flex: 1; display: flex; justify-content: center; }
-        .header-right { flex: 1; display: flex; justify-content: flex-end; }
+            .menu-toggle-btn {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 22px;
+                cursor: pointer;
+                transition: 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+            }
+            .menu-toggle-btn:hover {
+                color: #00d26a;
+            }
 
-        .actions-left { gap: 30px; }
-        .action-item { display: flex; align-items: center; gap: 10px; cursor: pointer; }
-        .action-item i { font-size: 24px; color: white; transition: 0.3s ease; }
-        .action-item:hover i { color: #00d26a; }
+            .header-left {
+                flex: 1;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center; 
+                gap: 20px;
+            }
+            .header-center {
+                flex: 2;
+                display: flex;
+                justify-content: center;
+            }
+            .header-right {
+                flex: 1;
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+            }
 
-        .icon-wrapper { position: relative; }
-        .cart-badge {
-            position: absolute; top: -8px; right: -10px;
-            background-color: #ff3b30; color: white;
-            font-size: 12px; font-weight: bold;
-            height: 18px; width: 18px;
-            display: flex; justify-content: center; align-items: center;
-            border-radius: 50%;
-        }
+            .actions-left {
+                display: flex;
+                gap: 30px;
+                align-items: center;
+            }
+            .action-item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                cursor: pointer;
+            }
+            .action-item i {
+                font-size: 24px;
+                color: white;
+                transition: 0.3s ease;
+                display: flex;
+                align-items: center;
+            }
+            .action-item:hover i {
+                color: #00d26a;
+            }
 
-        .action-text { font-size: 16px; font-weight: 500; }
-        .action-text-multi { display: flex; flex-direction: column; font-size: 12px; font-weight: 500; line-height: 1.2; }
+            .icon-wrapper {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .cart-badge {
+                position: absolute;
+                top: -8px;
+                right: -10px;
+                background-color: #ff3b30;
+                color: white;
+                font-size: 12px;
+                font-weight: bold;
+                height: 18px;
+                width: 18px;
+                display: none; 
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+                line-height: 1;
+            }
 
-        .logo-section { gap: 10px; cursor: pointer; }
-        .logo-icon {
-            background-color: white; height: 40px; width: 40px;
-            border-radius: 50%; display: flex; justify-content: center; align-items: center;
-        }
-        .logo-icon i { color: #023015; font-size: 18px; }
-        
-        .logo-text { display: flex; flex-direction: column; }
-        .brand-name { color: #00d26a; font-size: 22px; font-weight: 900; letter-spacing: 1px; line-height: 1; }
-        .tagline { color: white; font-size: 10px; letter-spacing: 3px; margin-top: 2px; }
+            .action-text {
+                font-size: 16px;
+                font-weight: 500;
+            }
 
-        .search-section {
-            display: flex; align-items: center;
-            background-color: #01180b; padding: 10px 20px;
-            border-radius: 5px; width: 100%; max-width: 350px; 
-        }
-        .search-icon { color: #00d26a; font-size: 18px; margin-right: 10px; }
-        .search-input { background: transparent; border: none; outline: none; color: #00d26a; font-size: 16px; width: 100%; }
-        .search-input::placeholder { color: #00d26a; opacity: 0.8; }
+            .mobile-cart-btn {
+                display: none;
+                background: none;
+                border: none;
+                color: white;
+                cursor: pointer;
+                align-items: center;
+                justify-content: center;
+                line-height: 1;
+            }
+            .mobile-cart-btn i {
+                font-size: 22px;
+                display: flex;
+                align-items: center;
+            }
 
-        /* =========================================
-            অর্ডার ফর্ম CSS
-        ========================================= */
-        .main-content {
-            padding: 20px 10px;
-            display: flex;
-            justify-content: center;
-        }
+            .logo-section {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                cursor: pointer;
+                transition: transform 0.2s;
+            }
+            .logo-section:hover {
+                transform: scale(1.03);
+            }
 
-        .form-wrapper {
-            width: 100%;
-            max-width: 500px; 
-        }
+            .logo-text {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .brand-name {
+                color: #00d26a;
+                font-size: 24px;
+                font-weight: 900;
+                letter-spacing: 1px;
+                line-height: 1.1;
+            }
+            .tagline {
+                color: white;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 3px;
+                margin-top: 4px;
+            }
 
-        /* =========================================
-            নতুন ইমেজ স্লাইডার (Carousel) CSS
-        ========================================= */
-        .slider-container {
-            position: relative;
-            width: 100%;
-            border-radius: 16px;
-            margin-bottom: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
+            .search-section {
+                display: flex;
+                align-items: center;
+                background-color: #01180b;
+                padding: 10px 20px;
+                border-radius: 5px;
+                width: 100%;
+                max-width: 350px;
+            }
+            .search-icon {
+                color: #00d26a;
+                font-size: 18px;
+                margin-right: 10px;
+            }
+            .search-input {
+                background: transparent;
+                border: none;
+                outline: none;
+                color: #00d26a;
+                font-size: 16px;
+                width: 100%;
+            }
+            .search-input::placeholder {
+                color: #00d26a;
+                opacity: 0.8;
+            }
 
-        .slider-track {
-            display: flex;
-            transition: transform 0.4s ease-in-out;
-            width: 100%;
-        }
+            .mobile-search-trigger {
+                display: none;
+                background: none;
+                border: none;
+                color: white;
+                font-size: 22px;
+                cursor: pointer;
+            }
 
-        .slide-img {
-            min-width: 100%;
-            height: auto;
-            object-fit: cover;
-            display: block;
-        }
+            /* =========================================
+            সাইড মেনুবার CSS
+            ========================================= */
+            .sidebar-menu {
+                position: fixed;
+                top: 0;
+                left: -300px;
+                width: 280px;
+                height: 100%;
+                background: linear-gradient(180deg, #01180b 0%, var(--header-bg) 100%);
+                box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+                padding: 20px;
+                color: white;
+                overflow-y: auto;
+            }
+            .sidebar-menu.open {
+                left: 0;
+            }
 
-        .slider-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(255, 255, 255, 0.7);
-            color: #CC0000;
-            border: none;
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 16px;
-            transition: 0.3s;
-            z-index: 10;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
+            .sidebar-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1px solid rgba(0, 210, 106, 0.3);
+                padding-bottom: 15px;
+                margin-bottom: 20px;
+            }
+            .sidebar-brand {
+                font-size: 18px;
+                font-weight: 700;
+                color: #00d26a;
+            }
+            .sidebar-close-btn {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 22px;
+                cursor: pointer;
+                transition: 0.3s;
+            }
+            .sidebar-close-btn:hover {
+                color: var(--primary);
+                transform: rotate(90deg);
+            }
 
-        .slider-btn:hover {
-            background-color: #CC0000;
-            color: white;
-        }
+            .sidebar-links {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .sidebar-links li a {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                color: #e0e0e0;
+                text-decoration: none;
+                font-size: 15px;
+                padding: 12px 15px;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                background: rgba(255, 255, 255, 0.03);
+            }
+            .sidebar-links li a:hover {
+                background: rgba(0, 210, 106, 0.15);
+                color: #00d26a;
+                padding-left: 22px;
+            }
+            .sidebar-links li a i {
+                font-size: 17px;
+                width: 20px;
+                text-align: center;
+            }
 
-        .prev-btn { left: 10px; }
-        .next-btn { right: 10px; }
+            .sidebar-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                backdrop-filter: blur(3px);
+                z-index: 999;
+                display: none;
+            }
 
-        /* =========================================
-            প্রোডাক্ট ডেসক্রিপশন CSS
-        ========================================= */
-        .product-description-box {
-            background: var(--box-bg);
-            padding: 20px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-            border: 1px solid var(--border-color);
-            text-align: center; 
-        }
+            /* =========================================
+            স্লাইডিং কার্ট ড্রয়ার (Cart Drawer CSS)
+            ========================================= */
+            .cart-drawer {
+                position: fixed;
+                top: 0;
+                right: -340px;
+                width: 330px;
+                height: 100%;
+                background: #ffffff;
+                box-shadow: -5px 0 25px rgba(0,0,0,0.15);
+                z-index: 10000;
+                transition: all 0.35s ease;
+                display: flex;
+                flex-direction: column;
+                color: var(--text-dark);
+            }
+            .cart-drawer.open {
+                right: 0;
+            }
+            .cart-drawer-header {
+                padding: 20px;
+                background: var(--header-bg);
+                color: white;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .cart-drawer-header h3 {
+                font-size: 18px;
+                font-weight: 600;
+            }
+            .cart-drawer-close {
+                background: none;
+                border: none;
+                color: white;
+                font-size: 22px;
+                cursor: pointer;
+            }
+            .cart-items-body {
+                flex: 1;
+                overflow-y: auto;
+                padding: 15px;
+                display: flex;
+                flex-direction: column;
+                gap: 15px;
+            }
+            .empty-cart-msg {
+                text-align: center;
+                color: var(--text-gray);
+                margin-top: 40px;
+                font-size: 15px;
+            }
+            .cart-item-row {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding-bottom: 12px;
+                border-bottom: 1px solid #eee;
+            }
+            .cart-item-row img {
+                width: 50px;
+                height: 50px;
+                object-fit: contain;
+                background: #f9f9f9;
+                border-radius: 5px;
+            }
+            .cart-item-info {
+                flex: 1;
+            }
+            .cart-item-title {
+                font-size: 14px;
+                font-weight: 600;
+                color: #333;
+            }
+            .cart-item-details {
+                font-size: 13px;
+                color: var(--success);
+                margin-top: 2px;
+            }
+            .cart-item-remove {
+                background: none;
+                border: none;
+                color: #ff3b30;
+                cursor: pointer;
+                font-size: 16px;
+                padding: 5px;
+            }
+            .cart-drawer-footer {
+                padding: 20px;
+                border-top: 1px solid #eee;
+                background: #fdfdfd;
+            }
+            .cart-total-box {
+                display: flex;
+                justify-content: space-between;
+                font-size: 16px;
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+            .checkout-btn {
+                width: 100%;
+                background: var(--success);
+                color: white;
+                border: none;
+                padding: 12px;
+                font-size: 16px;
+                font-weight: 600;
+                border-radius: 8px;
+                cursor: pointer;
+                transition: 0.2s;
+                text-align: center;
+                text-decoration: none;
+                display: block;
+            }
+            .checkout-btn:hover {
+                background: var(--success-hover);
+            }
 
-        .price-highlight {
-            color: var(--primary);
-            font-size: 20px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 15px;
-            background: var(--primary-light);
-            padding: 10px;
-            border-radius: 8px;
-            border: 1px dashed var(--primary);
-        }
+            /* =========================================
+            চেকআউট ফর্ম মডেল
+            ========================================= */
+            .checkout-modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(5px);
+                z-index: 10001;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+            .checkout-modal.show {
+                display: flex;
+            }
+            .checkout-content {
+                background: white;
+                padding: 25px;
+                border-radius: 15px;
+                width: 100%;
+                max-width: 500px;
+                max-height: 90vh;
+                overflow-y: auto;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+                position: relative;
+            }
+            .checkout-close-btn {
+                position: absolute;
+                top: 15px;
+                right: 15px;
+                background: none;
+                border: none;
+                font-size: 22px;
+                cursor: pointer;
+                color: #666;
+            }
+            .checkout-form-title {
+                font-size: 20px;
+                font-weight: 700;
+                color: var(--header-bg);
+                margin-bottom: 20px;
+                border-bottom: 2px solid var(--success);
+                padding-bottom: 8px;
+            }
+            .form-group {
+                margin-bottom: 15px;
+            }
+            .form-group label {
+                display: block;
+                font-size: 14px;
+                font-weight: 600;
+                margin-bottom: 5px;
+                color: #333;
+            }
+            .form-group input, .form-group textarea, .form-group select {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid var(--border-color);
+                border-radius: 6px;
+                font-size: 15px;
+                outline: none;
+            }
+            .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+                border-color: var(--success);
+            }
+            .order-summary-box {
+                background: #f9f9f9;
+                padding: 15px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                border: 1px dashed #ccc;
+            }
+            .summary-title {
+                font-weight: 700;
+                margin-bottom: 10px;
+                color: #333;
+                font-size: 15px;
+            }
+            .summary-item-list {
+                font-size: 14px;
+                color: #555;
+                margin-bottom: 10px;
+                line-height: 1.6;
+            }
+            .submit-order-btn {
+                width: 100%;
+                background: var(--success);
+                color: white;
+                border: none;
+                padding: 12px;
+                font-size: 16px;
+                font-weight: 700;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+            .submit-order-btn:hover {
+                background: var(--success-hover);
+            }
 
-        .package-title {
-            font-size: 17px;
-            font-weight: 700;
-            color: var(--text-dark);
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center; 
-            gap: 8px;
-        }
+            /* =========================================
+            অর্ডার সাকসেস মেসেজ মডেল CSS
+            ========================================= */
+            .success-modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(5px);
+                z-index: 10002;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+            }
+            .success-modal.show {
+                display: flex;
+            }
+            .success-content {
+                background: white;
+                padding: 40px 30px;
+                border-radius: 20px;
+                width: 100%;
+                max-width: 450px;
+                text-align: center;
+                box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+                animation: scaleUp 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+            @keyframes scaleUp {
+                0% { transform: scale(0.7); opacity: 0; }
+                100% { transform: scale(1); opacity: 1; }
+            }
+            .success-icon-box {
+                font-size: 60px;
+                color: var(--success);
+                margin-bottom: 20px;
+            }
+            .success-title {
+                font-size: 24px;
+                font-weight: 700;
+                color: #222;
+                margin-bottom: 15px;
+            }
+            .success-msg {
+                font-size: 16px;
+                color: #555;
+                line-height: 1.6;
+                margin-bottom: 25px;
+            }
+            .success-close-btn {
+                background: var(--header-bg);
+                color: white;
+                border: none;
+                padding: 12px 35px;
+                font-size: 16px;
+                font-weight: 600;
+                border-radius: 30px;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+            .success-close-btn:hover {
+                background: var(--header-bg-light);
+            }
 
-        .package-list {
-            list-style: none;
-            margin-bottom: 15px;
-            padding: 0; 
-            display: inline-block; 
-            text-align: left; 
-            max-width: 100%;
-        }
+            /* =========================================
+            হিরো সেকশন
+            ========================================= */
+            .hero-banner-section {
+                width: 100%;
+                background: linear-gradient(135deg, var(--header-bg) 0%, var(--header-bg-light) 100%);
+                padding: 20px 5%;
+                display: block;
+                border-bottom: 4px solid #00d26a;
+            }
 
-        .package-list li {
-            font-size: 15px;
-            color: var(--text-gray);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: flex-start; 
-            gap: 10px;
-            font-weight: 500;
-            word-wrap: break-word; 
-        }
+            .banner-container {
+                width: 100%;
+                max-width: 1200px;
+                margin: 0 auto;
+                text-align: center;
+            }
 
-        .package-list li i {
-            color: #27AE60;
-            font-size: 14px;
-            margin-top: 4px; 
-        }
+            .hero-badge-text {
+                font-size: 16px;
+                color: #e0e0e0;
+                line-height: 1.5;
+                background: rgba(255, 255, 255, 0.1);
+                padding: 10px 25px;
+                border-radius: 30px;
+                display: inline-block;
+                border-left: 3px solid var(--secondary);
+                border-right: 3px solid var(--secondary);
+            }
 
-        .urgency-text {
-            color: #D35400;
-            font-size: 15px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 15px;
-            background: #FDF2E9;
-            padding: 8px;
-            border-radius: 5px;
-        }
+            /* =========================================
+            প্রোডাক্ট এরিয়া CSS
+            ========================================= */
+            #customHomeArea {
+                max-width: 1200px;
+                margin: 40px auto;
+                padding: 0 15px;
+            }
 
-        .btn-scroll-order {
-            width: 100%;
-            padding: 16px;
-            background: #27AE60;
-            color: white;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-        }
+            .product-area-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 25px;
+            }
 
-        .btn-scroll-order:hover {
-            background: #219653;
-            transform: translateY(-2px);
-        }
+            .product-area-title {
+                font-size: 24px;
+                font-weight: 700;
+                color: #222;
+                text-transform: uppercase;
+            }
 
-        /* ========================================= */
+            .bsm-product-grid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
 
-        .header-box {
-            background: linear-gradient(135deg, #CC0000, #990000);
-            padding: 25px 20px;
-            border-radius: 16px;
-            text-align: center;
-            margin-bottom: 15px;
-            box-shadow: 0 8px 20px rgba(204, 0, 0, 0.25);
-        }
+            .bsm-product-card {
+                background: #fff;
+                border: 1px solid #eee;
+                border-radius: 8px;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+                transition: transform 0.3s;
+            }
+            .bsm-product-card:hover {
+                transform: translateY(-3px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            }
 
-        .header-box h2 { color: #FFFFFF; font-size: 26px; font-weight: 700; margin-bottom: 5px; }
-        .header-box p { color: var(--secondary); font-size: 16px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; }
+            .bsm-img-wrapper {
+                width: 100%;
+                padding: 15px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #fff;
+                cursor: pointer;
+            }
+            .bsm-img-wrapper img {
+                max-width: 100%;
+                height: 200px;
+                object-fit: contain;
+            }
 
-        .section-box {
-            background: var(--box-bg);
-            padding: 20px; border-radius: 16px; margin-bottom: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color);
-        }
+            .bsm-action-bar {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                border-top: 1px solid #eee;
+                border-bottom: 1px solid #eee;
+                background: #f9f9f9;
+            }
 
-        .section-title { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+            .bsm-action-btn {
+                background: none;
+                border: none;
+                padding: 10px;
+                font-size: 16px;
+                color: #444;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.2s;
+            }
+            .bsm-action-btn:first-child {
+                border-right: 1px solid #eee;
+            }
+            .bsm-action-btn:hover {
+                background: #f0f0f0;
+                color: #27ae60;
+            }
 
-        .input-wrapper { margin-bottom: 15px; }
-        .input-wrapper label { display: block; font-size: 15px; color: var(--text-gray); margin-bottom: 5px; font-weight: 600; }
-        .input-wrapper input, .input-wrapper textarea {
-            width: 100%; padding: 14px; background: #F9FAFB;
-            border: 2px solid #F3F4F6; border-radius: 10px; font-size: 15px;
-            color: var(--text-dark); transition: all 0.3s ease;
-        }
-        .input-wrapper textarea { height: 80px; resize: none; }
-        .input-wrapper input:focus, .input-wrapper textarea:focus {
-            background: var(--box-bg); border-color: var(--primary); outline: none; box-shadow: 0 0 0 4px var(--primary-light);
-        }
+            .bsm-info-wrapper {
+                padding: 15px;
+                text-align: left;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .bsm-prod-name {
+                font-size: 15px;
+                font-weight: 600;
+                color: #333;
+                line-height: 1.4;
+            }
+            .bsm-price-box {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .bsm-current-price {
+                font-size: 20px;
+                font-weight: 700;
+                color: #27ae60;
+            }
 
-        /* Delivery Options Updated */
-        .delivery-grid {
-            display: grid;
-            grid-template-columns: 1fr; /* একটি মাত্র অপশনের জন্য ফুল উইডথ */
-            gap: 10px;
-        }
+            /* =========================================
+            প্রোডাক্ট বিস্তারিত পপ-আপ
+            ========================================= */
+            .product-view-modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.7);
+                backdrop-filter: blur(8px);
+                z-index: 10005;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                opacity: 0;
+                transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+            .product-view-modal.show {
+                display: flex;
+                opacity: 1;
+            }
+            .product-view-content {
+                background: #ffffff;
+                padding: 30px;
+                border-radius: 20px;
+                max-width: 460px;
+                width: 100%;
+                position: relative;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+                text-align: center;
+                transform: scale(0.6) translateY(30px) rotateX(-10deg);
+                transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+                perspective: 1000px;
+            }
+            .product-view-modal.show .product-view-content {
+                transform: scale(1) translateY(0) rotateX(0deg);
+            }
+            
+            .pv-close-btn {
+                position: absolute;
+                top: -15px;
+                right: -15px;
+                font-size: 20px;
+                color: white;
+                background: #ff3b30;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                box-shadow: 0 4px 12px rgba(255, 59, 48, 0.4);
+                transition: all 0.25s ease;
+                z-index: 10100;
+                border: 2px solid #ffffff;
+            }
+            .pv-close-btn:hover {
+                background: #cc0000;
+                transform: scale(1.15) rotate(90deg);
+            }
+            
+            .pv-img-box {
+                width: 100%;
+                background: #fdfdfd;
+                padding: 15px;
+                border: 1px solid #f0f0f0;
+                border-radius: 14px;
+                margin-bottom: 18px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                overflow: hidden;
+            }
+            .pv-img-box img {
+                max-height: 260px;
+                max-width: 100%;
+                object-fit: contain;
+                transition: transform 0.5s ease;
+            }
+            .pv-img-box:hover img {
+                transform: scale(1.04);
+            }
+            .pv-title {
+                font-size: 19px;
+                font-weight: 700;
+                color: #222;
+                margin-bottom: 10px;
+            }
+            .pv-price {
+                font-size: 24px;
+                font-weight: 700;
+                color: #27ae60;
+                margin-bottom: 20px;
+            }
+            .pv-buy-btn {
+                width: 100%;
+                background: #27ae60;
+                color: white;
+                border: none;
+                padding: 14px;
+                font-size: 16px;
+                font-weight: 600;
+                border-radius: 10px;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+                transition: all 0.25s ease;
+            }
+            .pv-buy-btn:hover {
+                background: #219653;
+                box-shadow: 0 6px 20px rgba(39, 174, 96, 0.4);
+                transform: translateY(-2px);
+            }
 
-        .delivery-box {
-            position: relative; background: var(--box-bg); border: 2px solid var(--border-color);
-            border-radius: 12px; padding: 15px 5px; text-align: center; cursor: pointer; transition: all 0.3s ease;
-        }
-        .delivery-box input[type="radio"] { display: none; }
-        .delivery-box:hover { border-color: var(--secondary); background: #FFFAF0; }
-        .delivery-box.active { border-color: var(--primary); background: var(--primary-light); }
-
-        .check-icon {
-            position: absolute; top: 5px; right: 5px; width: 18px; height: 18px;
-            background: var(--primary); color: white; border-radius: 50%; display: flex;
-            align-items: center; justify-content: center; font-size: 10px; opacity: 0;
-            transform: scale(0); transition: all 0.3s ease;
-        }
-        .delivery-box.active .check-icon { opacity: 1; transform: scale(1); }
-
-        .box-title { display: block; font-size: 14px; font-weight: 600; color: var(--text-dark); margin-top: 5px; margin-bottom: 5px; }
-        .box-price { display: inline-block; font-size: 15px; font-weight: 700; color: var(--primary); background: var(--box-bg); padding: 2px 8px; border-radius: 20px; border: 1px solid var(--primary-light); }
-
-        .submit-box { background: var(--box-bg); padding: 20px; border-radius: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border: 1px solid var(--border-color); }
-        .total-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px dashed var(--border-color); }
-        .total-label { font-size: 18px; color: var(--text-gray); font-weight: 600; }
-        .total-amount { font-size: 24px; color: var(--primary); font-weight: 700; }
-
-        .btn-confirm {
-            width: 100%; padding: 16px; background: var(--primary); color: white; border: none;
-            border-radius: 10px; font-size: 18px; font-weight: 700; cursor: pointer; transition: all 0.3s;
-        }
-        .btn-confirm:hover { background: #A30000; }
-
-        /* Success Message Box */
-        .success-box {
-            display: none; background: var(--box-bg); padding: 50px 20px;
-            border-radius: 16px; text-align: center; border: 2px solid #27AE60;
-            box-shadow: 0 10px 30px rgba(39, 174, 96, 0.1); margin-top: 20px;
-        }
-        .success-box h3 { color: #27AE60; font-size: 28px; margin-top: 15px; margin-bottom: 10px; }
-
-        /* =========================================
+            /* =========================================
             রেসপন্সিভ মিডিয়া কোয়েরি
-        ========================================= */
-        @media (max-width: 768px) {
-            .header-container { padding: 15px 20px; }
-            .header-center { order: 1; flex: auto; justify-content: flex-start; }
-            .header-left { order: 2; flex: auto; justify-content: flex-end; }
-            .header-right { order: 3; flex: 100%; justify-content: center; margin-top: 10px; }
-            .search-section { max-width: 100%; }
-            .action-text, .action-text-multi { display: none; }
-            .logo-icon { height: 35px; width: 35px; }
-            .logo-icon i { font-size: 16px; }
-        }
-
-        @media (max-width: 480px) {
-            .brand-name { font-size: 18px; }
-            .tagline { font-size: 8px; letter-spacing: 2px; }
-        }
-    </style>
-</head>
-<body>
-
-    <header class="header-container">
-        <div class="header-left actions-left">
-            <div class="action-item">
-                <div class="icon-wrapper">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                    <span class="cart-badge">0</span>
+            ========================================= */
+            @media (max-width: 768px) {
+                body {
+                    padding-top: 135px;
+                }
+                .header-container {
+                    padding: 12px 20px;
+                }
+                .header-left {
+                    flex: 0 0 auto;
+                    order: 1;
+                    gap: 15px;
+                }
+                .mobile-cart-btn {
+                    display: flex;
+                }
+                .header-center {
+                    flex: 1;
+                    order: 2;
+                    justify-content: center;
+                }
+                .header-right {
+                    flex: 0 0 auto;
+                    order: 3;
+                }
+                .actions-left {
+                    display: none;
+                }
+                .brand-name {
+                    font-size: 19px;
+                }
+                .tagline {
+                    font-size: 9px;
+                }
+                .search-section {
+                    display: none;
+                }
+                .mobile-search-trigger {
+                    display: block;
+                }
+                .bsm-product-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 12px;
+                }
+                .bsm-img-wrapper img {
+                    height: 150px;
+                }
+                .pv-close-btn {
+                    top: -10px;
+                    right: -10px;
+                    width: 32px;
+                    height: 32px;
+                    font-size: 18px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="sticky-header-wrapper">
+            <div class="sidebar-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+            
+            <div class="sidebar-menu" id="sideMenu">
+                <div class="sidebar-header">
+                    <span class="sidebar-brand"><i class="fa-solid fa-bars-staggered"></i> মেনু অপশন</span>
+                    <button class="sidebar-close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-                <span class="action-text">Cart</span>
+                <ul class="sidebar-links">
+                    <li><a href="#" onclick="showHomePage(); toggleMenu();"><i class="fa-solid fa-house"></i> হোম পেজ</a></li>
+                    <li><a href="#" onclick="toggleCartDrawer(); toggleMenu();"><i class="fa-solid fa-bag-shopping"></i> আমাদের প্রোডাক্টস (Cart)</a></li>
+                    <li><a href="#" onclick="toggleMenu(); alert('অর্ডার ট্র্যাকিং অপশনটি শীঘ্রই আসছে!');"><i class="fa-solid fa-truck-fast"></i> অর্ডার ট্র্যাকিং</a></li>
+                    <li><a href="https://wa.me/yournumber" target="_blank" onclick="toggleMenu();"><i class="fa-brands fa-whatsapp"></i> যোগাযোগ করুন (WhatsApp)</a></li>
+                    <li><a href="#" onclick="toggleMenu(); alert('আমাদের সম্পর্কে বিস্তারিত আসছে...');"><i class="fa-solid fa-circle-info"></i> আমাদের সম্পর্কে</a></li>
+                    <li><a href="#" onclick="toggleMenu(); alert('শর্তাবলী ও পলিসি পেজটি তৈরি হচ্ছে...');"><i class="fa-solid fa-file-contract"></i> শর্তাবলী ও পলিসি</a></li>
+                </ul>
             </div>
-            <div class="action-item">
-                <i class="fa-solid fa-map-location-dot"></i>
-                <div class="action-text-multi">
-                    <span>Order</span>
-                    <span>Track</span>
+
+            <div class="cart-drawer" id="cartDrawer">
+                <div class="cart-drawer-header">
+                    <h3><i class="fa-solid fa-cart-shopping"></i> শপিং কার্ট</h3>
+                    <button class="cart-drawer-close" onclick="toggleCartDrawer()"><i class="fa-solid fa-xmark"></i></button>
                 </div>
-            </div>
-        </div>
-
-        <div class="header-center logo-section">
-            <div class="logo-icon">
-                <i class="fa-solid fa-shop"></i> 
-            </div>
-            <div class="logo-text">
-                <div class="brand-name">BEST SELLING MART</div>
-                <div class="tagline">PREMIUM QUALITY</div>
-            </div>
-        </div>
-
-        <div class="header-right">
-            <div class="search-section">
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" placeholder="Search in Best Selling Mart..." class="search-input">
-            </div>
-        </div>
-    </header>
-
-    <main class="main-content">
-        <div class="form-wrapper">
-            <div id="mainFormArea">
-                
-                <div class="slider-container">
-                    <div class="slider-track" id="sliderTrack">
-                        <img src="img/pic%20(1).PNG" alt="Product Image 1" class="slide-img">
-                        <img src="img/pic%20(2).PNG" alt="Product Image 2" class="slide-img">
-                        <img src="img/pic%20(3).PNG" alt="Product Image 3" class="slide-img">
-                        <img src="img/pic%20(4).PNG" alt="Product Image 4" class="slide-img">
+                <div class="cart-items-body" id="cartItemsBody">
+                    <div class="empty-cart-msg">কার্ট বর্তমানে খালি আছে।</div>
+                </div>
+                <div class="cart-drawer-footer">
+                    <div class="cart-total-box">
+                        <span>মোট পরিমাণ:</span>
+                        <span id="cartTotalAmount">৳০</span>
                     </div>
+                    <button class="checkout-btn" onclick="openCheckoutForm()">অর্ডার করুন</button>
+                </div>
+            </div>
+
+            <div class="checkout-modal" id="checkoutModal">
+                <div class="checkout-content">
+                    <button class="checkout-close-btn" onclick="closeCheckoutForm()"><i class="fa-solid fa-xmark"></i></button>
+                    <div class="checkout-form-title"><i class="fa-solid fa-truck-ramp-box"></i> ডেলিভারি ও অর্ডার ডিটেইলস</div>
                     
-                    <button class="slider-btn prev-btn" onclick="moveSlide(-1)">
-                        <i class="fa-solid fa-chevron-left"></i>
-                    </button>
-                    <button class="slider-btn next-btn" onclick="moveSlide(1)">
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </button>
-                </div>
-
-                <div class="product-description-box">
-                    <div class="price-highlight">সেরা দাম: ১১৫০ টাকা মাত্র!</div>
-                    
-                    <div class="package-title"><i class="fa-solid fa-box-open"></i> প্যাকেজে যা যা থাকছে:</div>
-                    <ul class="package-list">
-                        <li><i class="fa-solid fa-circle-check"></i> হাই-স্পিড ড্রোন</li>
-                        <li><i class="fa-solid fa-circle-check"></i> রিমোট কন্ট্রোল</li>
-                        <li><i class="fa-solid fa-circle-check"></i> রিচার্জেবল ব্যাটারি</li>
-                        <li><i class="fa-solid fa-circle-check"></i> USB চার্জিং ক্যাবল</li>
-                        <li><i class="fa-solid fa-circle-check"></i> ৪টি অতিরিক্ত প্রপেলার</li>
-                        <li><i class="fa-solid fa-circle-check"></i> স্ক্রু-ড্রাইভার</li>
-                    </ul>
-
-                    <div class="urgency-text"><i class="fa-solid fa-bolt"></i> দ্রুত অর্ডার করুন! সীমিত সময়ের অফার।</div>
-
-                    <button type="button" class="btn-scroll-order" onclick="scrollToOrderForm()">
-                        <i class="fa-solid fa-cart-arrow-down"></i> এখনই অর্ডার করুন
-                    </button>
-                </div>
-
-                <div class="header-box" id="orderFormSection">
-                    <h2>CONFIRM YOUR ORDER</h2>
-                    <p>Best Selling Mart</p>
-                </div>
-
-                <form id="orderForm">
-                    <div class="section-box">
-                        <div class="section-title">
-                            <i class="fa-solid fa-user-check"></i> ডেলিভারি তথ্য দিন
-                        </div>
-                        
-                        <div class="input-wrapper">
-                            <label>আপনার নাম</label>
-                            <input type="text" name="name" placeholder="সম্পূর্ণ নাম লিখুন" required>
-                        </div>
-                        
-                        <div class="input-wrapper">
-                            <label>মোবাইল নাম্বার</label>
-                            <input type="tel" name="mobile" placeholder="০১৭XXXXXXXX" required>
-                        </div>
-                        
-                        <div class="input-wrapper" style="margin-bottom: 0;">
-                            <label>বিস্তারিত ঠিকানা</label>
-                            <textarea name="address" placeholder="গ্রাম/মহল্লা, থানা, জেলা" required></textarea>
+                    <div class="order-summary-box">
+                        <div class="summary-title"><i class="fa-solid fa-list-check"></i> আপনার সিলেক্ট করা প্রোডাক্টসমূহ:</div>
+                        <div class="summary-item-list" id="modalProductList">কোন প্রোডাক্ট সিলেক্ট করা হয়নি।</div>
+                        <div class="cart-total-box" style="margin-bottom: 0; padding-top: 10px; border-top: 1px dashed #ccc;">
+                            <span>সর্বমোট বিল:</span>
+                            <span id="modalTotalAmount" style="color: var(--success);">৳০</span>
                         </div>
                     </div>
 
-                    <div class="section-box">
-                        <div class="section-title">
-                            <i class="fa-solid fa-truck-fast"></i> ডেলিভারি চার্জ
+                    <form id="googleSheetOrderForm" onsubmit="submitOrderToGoogleSheet(event)">
+                        <div class="form-group">
+                            <label for="custName">আপনার নাম <span style="color:red;">*</span></label>
+                            <input type="text" id="custName" required placeholder="যেমন: আব্দুল্লাহ আল মামুন">
                         </div>
+                        <div class="form-group">
+                            <label for="custPhone">মোবাইল নম্বর <span style="color:red;">*</span></label>
+                            <input type="tel" id="custPhone" required placeholder="যেমন: 017XXXXXXXX">
+                        </div>
+                        <div class="form-group">
+                            <label for="custAddress">সম্পূর্ণ ঠিকানা <span style="color:red;">*</span></label>
+                            <textarea id="custAddress" rows="3" required placeholder="যেমন: গ্রাম, ডাকঘর, থানা, জেলা"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="custDelivery">ডেলিভারি এরিয়া <span style="color:red;">*</span></label>
+                            <select id="custDelivery" required onchange="updateTotalWithDelivery()">
+                                <option value="inside">ঢাকার ভিতরে (ডেলিভারি চার্জ ৳৮০)</option>
+                                <option value="outside">ঢাকার বাইরে (ডেলিভারি চার্জ ৳১৫০)</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="submit-order-btn" id="submitBtnText">অর্ডার নিশ্চিত করুন</button>
+                    </form>
+                </div>
+            </div>
 
-                        <div class="delivery-grid">
-                            <label class="delivery-box active" onclick="selectBox(this, 130)">
-                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
-                                <span class="box-title">সারাদেশে ডেলিভারি চার্জ মাত্র!</span>
-                                <span class="box-price">১৩০ ৳</span>
-                                <input type="radio" name="delivery" value="130" checked>
-                            </label>
+            <div class="success-modal" id="successModal">
+                <div class="success-content">
+                    <div class="success-icon-box">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </div>
+                    <div class="success-title">অর্ডার সফল হয়েছে!</div>
+                    <div class="success-msg">
+                        ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গ্রহণ করা হয়েছে। শীঘ্রই আমাদের একজন প্রতিনিধি আপনার সাথে যোগাযোগ করবেন।
+                    </div>
+                    <button class="success-close-btn" onclick="closeSuccessModal()">ঠিক আছে</button>
+                </div>
+            </div>
+
+            <header class="header-container">
+                <div class="header-left">
+                    <button class="menu-toggle-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+                    <button class="mobile-cart-btn" onclick="toggleCartDrawer()">
+                        <div class="icon-wrapper">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="cart-badge" id="mobileCartBadge"></span>
+                        </div>
+                    </button>
+                    <div class="actions-left">
+                        <div class="action-item" onclick="toggleCartDrawer()">
+                            <div class="icon-wrapper">
+                                <i class="fa-solid fa-cart-shopping"></i>
+                                <span class="cart-badge" id="mainCartBadge"></span>
+                            </div>
+                            <span class="action-text">Cart</span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="submit-box">
-                        <div class="total-row">
-                            <span class="total-label">সর্বমোট বিল:</span>
-                            <span class="total-amount"><span id="finalPrice">১২৮০</span> ৳</span>
+                <div class="header-center" onclick="showHomePage()">
+                    <div class="logo-section">
+                        <div class="logo-text">
+                            <div class="brand-name">BEST SELLING MART</div>
+                            <div class="tagline">PREMIUM QUALITY</div>
                         </div>
-                        <button type="submit" id="btnSubmit" class="btn-confirm">
-                            অর্ডার কনফার্ম করুন <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <div class="search-section">
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                        <input type="text" placeholder="Search in Best Selling Mart..." class="search-input" />
+                    </div>
+                    <button class="mobile-search-trigger" onclick="toggleMobileSearch()">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </header>
+
+            <div class="hero-banner-section" id="heroBannerArea">
+                <div class="banner-container">
+                    <div class="hero-badge-text">
+                        <i class="fa-solid fa-star" style="color: var(--secondary)"></i> বাচ্চাদের সেরা ও আকর্ষণীয় খেলনার বিশ্বস্ত কালেকশন!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="customHomeArea">
+            <div class="product-area-header">
+                <div class="product-area-title">OUR BEST SELLERS</div>
+            </div>
+
+            <div class="bsm-product-grid">
+                <div class="bsm-product-card">
+                    <div class="bsm-img-wrapper" onclick="previewProduct('হাই-স্পিড ড্রোন 1', '৳১১৫০', 'images/pic-2.PNG')">
+                        <img src="images/pic-2.PNG" alt="Drone 1"/>
+                    </div>
+                    <div class="bsm-action-bar">
+                        <button class="bsm-action-btn" onclick="previewProduct('হাই-স্পিড ড্রোন 1', '৳১১৫০', 'images/pic-2.PNG')" title="দেখুন">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                        <button class="bsm-action-btn" onclick="addToCart('হাই-স্পিড ড্রোন 1', 1150, 'images/pic-2.PNG')">
+                            <i class="fa-solid fa-cart-shopping"></i>
                         </button>
                     </div>
-                </form>
-            </div>
+                    <div class="bsm-info-wrapper">
+                        <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 1</span></div>
+                        <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                    </div>
+                </div>
 
-            <div id="successArea" class="success-box">
-                <i class="fa-regular fa-circle-check" style="font-size: 60px; color: #27AE60;"></i>
-                <h3>অর্ডার সম্পন্ন!</h3>
-                <p style="color: #666; font-size: 16px;">ধন্যবাদ। আমরা আপনার অর্ডারটি সফলভাবে রিসিভ করেছি। খুব শীঘ্রই আপনার সাথে যোগাযোগ করা হবে।</p>
+                <div class="bsm-product-card">
+                    <div class="bsm-img-wrapper" onclick="previewProduct('হাই-স্পিড ড্রোন 2', '৳১১৫০', 'images/pic-3.PNG')">
+                        <img src="images/pic-3.PNG" alt="Drone 2"/>
+                    </div>
+                    <div class="bsm-action-bar">
+                        <button class="bsm-action-btn" onclick="previewProduct('হাই-স্পিড ড্রোন 2', '৳১১৫০', 'images/pic-3.PNG')" title="দেখুন">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                        <button class="bsm-action-btn" onclick="addToCart('হাই-স্পিড ড্রোন 2', 1150, 'images/pic-3.PNG')">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+                    </div>
+                    <div class="bsm-info-wrapper">
+                        <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 2</span></div>
+                        <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                    </div>
+                </div>
+
+                <div class="bsm-product-card">
+                    <div class="bsm-img-wrapper" onclick="previewProduct('হাই-স্পিড ড্রোন 3', '৳১১৫০', 'images/pic-4.PNG')">
+                        <img src="images/pic-4.PNG" alt="Drone 3"/>
+                    </div>
+                    <div class="bsm-action-bar">
+                        <button class="bsm-action-btn" onclick="previewProduct('হাই-স্পিড ড্রোন 3', '৳১১৫০', 'images/pic-4.PNG')" title="দেখুন">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                        <button class="bsm-action-btn" onclick="addToCart('হাই-স্পিড ড্রোন 3', 1150, 'images/pic-4.PNG')">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+                    </div>
+                    <div class="bsm-info-wrapper">
+                        <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 3</span></div>
+                        <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                    </div>
+                </div>
+                <div class="bsm-product-card">
+                    <div class="bsm-img-wrapper" onclick="previewProduct('হাই-স্পিড ড্রোন 4', '৳১১৫০', 'images/pic-1.PNG')">
+                        <img src="images/pic-1.PNG" alt="Drone 4">
+                    </div>
+                    <div class="bsm-action-bar">
+                        <button class="bsm-action-btn" onclick="previewProduct('হাই-স্পিড ড্রোন 4', '৳১১৫০', 'images/pic-1.PNG')" title="দেখুন">
+                            <i class="fa-regular fa-eye"></i>
+                        </button>
+                        <button class="bsm-action-btn" onclick="addToCart('হাই-স্পিড ড্রোন 4', 1150, 'images/pic-1.PNG')">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </button>
+                    </div>
+                    <div class="bsm-info-wrapper">
+                        <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 4</span></div>
+                        <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                    </div>
+                </div>
+                
             </div>
         </div>
-    </main>
 
-    <script>
-        // =========================================
-        // স্লাইডার (Image Slider) এর জাভাস্ক্রিপ্ট
-        // =========================================
-        let currentSlideIndex = 0;
-        const sliderTrack = document.getElementById('sliderTrack');
-        const slides = document.querySelectorAll('.slide-img');
-        const totalSlides = slides.length;
+        <div class="product-view-modal" id="productModal">
+            <div class="product-view-content">
+                <button class="pv-close-btn" onclick="closeProductModal()"><i class="fa-solid fa-xmark"></i></button>
+                <div class="pv-img-box">
+                    <img id="modalImg" src="" alt="Product Image">
+                </div>
+                <div class="pv-title" id="modalTitle">প্রোডাক্ট নাম</div>
+                <div class="pv-price" id="modalPrice">৳০</div>
+                <button class="pv-buy-btn" id="modalBuyBtn">কার্টে যোগ করুন</button>
+            </div>
+        </div>
 
-        function moveSlide(direction) {
-            currentSlideIndex += direction;
+        <script>
+            let cart = [];
+            let pureSubTotal = 0; 
 
-            if (currentSlideIndex >= totalSlides) {
-                currentSlideIndex = 0;
+            function toggleMenu() {
+                const menu = document.getElementById('sideMenu');
+                const overlay = document.getElementById('menuOverlay');
+                menu.classList.toggle('open');
+                overlay.style.display = menu.classList.contains('open') ? 'block' : 'none';
             }
-            if (currentSlideIndex < 0) {
-                currentSlideIndex = totalSlides - 1;
+
+            function toggleCartDrawer() {
+                document.getElementById('cartDrawer').classList.toggle('open');
             }
 
-            const translateX = -(currentSlideIndex * 100);
-            sliderTrack.style.transform = `translateX(${translateX}%)`;
-        }
+            function updateCartUI() {
+                const body = document.getElementById('cartItemsBody');
+                const mainBadge = document.getElementById('mainCartBadge');
+                const mobileBadge = document.getElementById('mobileCartBadge');
+                const totalAmountText = document.getElementById('cartTotalAmount');
 
-        // =========================================
-        // স্ক্রল টু অর্ডার ফর্ম ফাংশন
-        // =========================================
-        function scrollToOrderForm() {
-            const formSection = document.getElementById('orderFormSection');
-            formSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
+                if (cart.length === 0) {
+                    body.innerHTML = '<div class="empty-cart-msg">কার্ট বর্তমানে খালি আছে।</div>';
+                    mainBadge.style.display = 'none';
+                    mobileBadge.style.display = 'none';
+                    totalAmountText.innerText = '৳০';
+                    pureSubTotal = 0;
+                    return;
+                }
 
-        // =========================================
-        // ফর্ম ও অন্যান্য জাভাস্ক্রিপ্ট
-        // =========================================
-        const BASE_PRICE = 1150;
+                let totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+                mainBadge.innerText = totalItems;
+                mainBadge.style.display = 'flex';
+                mobileBadge.innerText = totalItems;
+                mobileBadge.style.display = 'flex';
 
-        function convertToBangla(num) {
-            const eng = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-            const bng = ['০', '১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯'];
-            return num.toString().split('').map(c => eng.includes(c) ? bng[eng.indexOf(c)] : c).join('');
-        }
+                body.innerHTML = '';
+                pureSubTotal = 0;
 
-        function selectBox(element, charge) {
-            document.querySelectorAll('.delivery-box').forEach(box => box.classList.remove('active'));
-            element.classList.add('active');
-            element.querySelector('input').checked = true;
+                cart.forEach((item, index) => {
+                    let rowTotal = item.price * item.qty;
+                    pureSubTotal += rowTotal;
 
-            let total = BASE_PRICE + charge;
-            document.getElementById('finalPrice').innerText = convertToBangla(total);
-        }
+                    const row = document.createElement('div');
+                    row.className = 'cart-item-row';
+                    row.innerHTML = `
+                        <img src="${item.img}" alt="">
+                        <div class="cart-item-info">
+                            <div class="cart-item-title">${item.name}</div>
+                            <div class="cart-item-details">${item.qty} x ৳${item.price} = ৳${rowTotal}</div>
+                        </div>
+                        <button class="cart-item-remove" onclick="removeFromCart(${index})"><i class="fa-solid fa-trash-can"></i></button>
+                    `;
+                    body.appendChild(row);
+                });
 
-        const form = document.getElementById('orderForm');
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz39CSR0ZgvD5a0_6NPeN3rUx9d3uHXARTE6I6RgZmqAA6bdrJYuWwrA-m6uPw5vD0E/exec'; 
+                totalAmountText.innerText = '৳' + pureSubTotal;
+            }
 
-        form.addEventListener('submit', e => {
-            e.preventDefault(); 
-            
-            const btn = document.getElementById('btnSubmit');
-            const originalText = btn.innerHTML;
-            
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> অপেক্ষা করুন...';
-            btn.disabled = true;
+            function addToCart(name, price, img) {
+                const existingIndex = cart.findIndex(item => item.name === name);
+                if (existingIndex > -1) {
+                    cart[existingIndex].qty += 1;
+                } else {
+                    cart.push({ name, price, img, qty: 1 });
+                }
+                updateCartUI();
+                if(!document.getElementById('cartDrawer').classList.contains('open')){
+                    toggleCartDrawer();
+                }
+            }
 
-            let selectedCharge = parseInt(document.querySelector('input[name="delivery"]:checked').value);
-            let totalAmount = BASE_PRICE + selectedCharge;
+            function removeFromCart(index) {
+                cart.splice(index, 1);
+                updateCartUI();
+            }
 
-            let formData = new FormData(form);
-            formData.append('deliveryCharge', selectedCharge);
-            formData.append('totalAmount', totalAmount);
+            function previewProduct(name, price, img) {
+                document.getElementById('modalTitle').innerText = name;
+                document.getElementById('modalPrice').innerText = price;
+                document.getElementById('modalImg').src = img;
+                
+                let intPrice = parseInt(price.replace(/[^0-9]/g, '')) || 1150;
+                document.getElementById('modalBuyBtn').onclick = function() {
+                    addToCart(name, intPrice, img);
+                    closeProductModal();
+                };
 
-            fetch(scriptURL, { method: 'POST', body: formData})
+                document.getElementById('productModal').classList.add('show');
+            }
+
+            function closeProductModal() {
+                document.getElementById('productModal').classList.remove('show');
+            }
+
+            function showHomePage() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            function toggleMobileSearch() {
+                alert('সার্চ অপশনটি সক্রিয় করা হচ্ছে...');
+            }
+
+            function openCheckoutForm() {
+                if (cart.length === 0) {
+                    alert('আপনার শপিং কার্ট খালি!');
+                    return;
+                }
+                document.getElementById('cartDrawer').classList.remove('open');
+                document.getElementById('checkoutModal').classList.add('show');
+
+                const listContainer = document.getElementById('modalProductList');
+                listContainer.innerHTML = '';
+                cart.forEach(item => {
+                    const p = document.createElement('div');
+                    p.style.marginBottom = '5px';
+                    p.innerHTML = `<i class="fa-solid fa-circle-dot" style="font-size:10px; color:var(--success);"></i> <strong>${item.name}</strong> - ${item.qty}টি`;
+                    listContainer.appendChild(p);
+                });
+                updateTotalWithDelivery();
+            }
+
+            function closeCheckoutForm() {
+                document.getElementById('checkoutModal').classList.remove('show');
+            }
+
+            function updateTotalWithDelivery() {
+                const deliveryType = document.getElementById('custDelivery').value;
+                let charge = (deliveryType === 'inside') ? 80 : 150;
+                let grandTotal = pureSubTotal + charge;
+                document.getElementById('modalTotalAmount').innerText = '৳' + grandTotal;
+            }
+
+            function closeSuccessModal() {
+                document.getElementById('successModal').classList.remove('show');
+            }
+
+            function submitOrderToGoogleSheet(event) {
+                event.preventDefault();
+                const submitBtn = document.getElementById('submitBtnText');
+                submitBtn.innerText = "অর্ডার প্রসেস হচ্ছে...";
+                submitBtn.disabled = true;
+
+                const scriptURL = 'https://script.google.com/macros/s/AKfycbx1GcvIjH_RBkStyCDt3z7hZZMyoYsT9JqJAhMohKkA6xx7bJLw5BG8PRoek4scK3fR/exec';
+
+                let productDetails = cart.map(item => `${item.name} (${item.qty}টি)`).join(', ');
+                const deliveryType = document.getElementById('custDelivery').value;
+                let charge = (deliveryType === 'inside') ? 80 : 150;
+                let grandTotal = pureSubTotal + charge;
+
+                const formData = new FormData();
+                formData.append('Name', document.getElementById('custName').value);
+                formData.append('Phone', document.getElementById('custPhone').value);
+                formData.append('Address', document.getElementById('custAddress').value);
+                formData.append('DeliveryArea', deliveryType === 'inside' ? 'ঢাকার ভিতরে' : 'ঢাকার বাইরে');
+                formData.append('Products', productDetails);
+                formData.append('SubTotal', pureSubTotal);
+                formData.append('DeliveryCharge', charge);
+                formData.append('GrandTotal', grandTotal);
+
+                fetch(scriptURL, { method: 'POST', body: formData })
                 .then(response => {
-                    document.getElementById('mainFormArea').style.display = 'none';
-                    document.getElementById('successArea').style.display = 'block';
-                    window.scrollTo(0,0);
+                    closeCheckoutForm();
+                    document.getElementById('successModal').classList.add('show');
+                    cart = [];
+                    updateCartUI();
+                    document.getElementById('googleSheetOrderForm').reset();
                 })
                 .catch(error => {
-                    console.error('Error!', error.message);
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
-                    alert('দুঃখিত, কোনো সমস্যা হয়েছে। আপনার ইন্টারনেট কানেকশন চেক করে আবার চেষ্টা করুন।');
+                    alert('দুঃখিত, আবার চেষ্টা করুন।');
+                })
+                .finally(() => {
+                    submitBtn.innerText = "অর্ডার নিশ্চিত করুন";
+                    submitBtn.disabled = false;
                 });
-        });
-    </script>
-
-</body>
+            }
+        </script>
+    </body>
 </html>
