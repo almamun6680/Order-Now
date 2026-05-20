@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Best Selling Mart</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="sticky-header-wrapper">
+        <div class="sidebar-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+        
+        <div class="sidebar-menu" id="sideMenu">
+            <div class="sidebar-header">
+                <span class="sidebar-brand"><i class="fa-solid fa-bars-staggered"></i> মেনু অপশন</span>
+                <button class="sidebar-close-btn" onclick="toggleMenu()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <ul class="sidebar-links">
+                <li><a href="#" onclick="showHomePage(); toggleMenu();"><i class="fa-solid fa-house"></i> হোম পেজ</a></li>
+                <li><a href="#" onclick="toggleCartDrawer(); toggleMenu();"><i class="fa-solid fa-bag-shopping"></i> আমাদের প্রোডাক্টস (Cart)</a></li>
+                <li><a href="#" onclick="toggleMenu(); alert('অর্ডার ট্র্যাকিং অপশনটি শীঘ্রই আসছে!');"><i class="fa-solid fa-truck-fast"></i> অর্ডার ট্র্যাকিং</a></li>
+                <li><a href="https://wa.me/+8801303462898" target="_blank" onclick="toggleMenu();"><i class="fa-brands fa-whatsapp"></i> যোগাযোগ করুন (WhatsApp)</a></li>
+                <li><a href="#" onclick="toggleMenu(); alert('আমাদের সম্পর্কে বিস্তারিত আসছে...');"><i class="fa-solid fa-circle-info"></i> আমাদের সম্পর্কে</a></li>
+                <li><a href="#" onclick="toggleMenu(); alert('শর্তাবলী ও পলিসি পেজটি তৈরি হচ্ছে...');"><i class="fa-solid fa-file-contract"></i> শর্তাবলী ও পলিসি</a></li>
+            </ul>
+        </div>
+
+        <div class="cart-drawer" id="cartDrawer">
+            <div class="cart-drawer-header">
+                <h3><i class="fa-solid fa-cart-shopping"></i> শপিং কার্ট</h3>
+                <button class="cart-drawer-close" onclick="toggleCartDrawer()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="cart-items-body" id="cartItemsBody">
+                <div class="empty-cart-msg">কার্ট বর্তমানে খালি আছে।</div>
+            </div>
+            <div class="cart-drawer-footer">
+                <div class="cart-total-box">
+                    <span>মোট পরিমাণ:</span>
+                    <span id="cartTotalAmount">৳০</span>
+                </div>
+                <button class="checkout-btn" onclick="openCheckoutForm()">অর্ডার করুন</button>
+            </div>
+        </div>
+
+        <header class="header-container">
+            <div class="header-left">
+                <button class="menu-toggle-btn" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i></button>
+                
+                <div class="search-section">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" placeholder="Search in Best Selling Mart..." class="search-input" />
+                </div>
+                <button class="mobile-search-trigger" onclick="toggleMobileSearch()">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <div class="header-center" onclick="showHomePage()">
+                <div class="logo-section">
+                    <div class="logo-text">
+                        <div class="brand-name">BEST SELLING MART</div>
+                        <div class="tagline">PREMIUM QUALITY</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="header-right">
+                <button class="mobile-cart-btn" onclick="toggleCartDrawer()">
+                    <div class="icon-wrapper">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="cart-badge" id="mobileCartBadge"></span>
+                    </div>
+                </button>
+                <div class="actions-left">
+                    <div class="action-item" onclick="toggleCartDrawer()">
+                        <div class="icon-wrapper">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            <span class="cart-badge" id="mainCartBadge"></span>
+                        </div>
+                        <span class="action-text">Cart</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="hero-banner-section" id="heroBannerArea">
+            
+            <div class="banner-container">
+                <div class="hero-badge-text">
+                    <i class="fa-solid fa-star" style="color: var(--secondary)"></i> বাচ্চাদের সেরা ও আকর্ষণীয় খেলনার বিশ্বস্ত কালেকশন!
+                </div>
+            </div>
+
+            <div class="better-football-anim">
+                <div class="play-group">
+                    <span class="boy boy1">👦🏻</span>
+                    <span class="ball">⚽</span>
+                    <span class="boy boy2">👦🏽</span>
+                </div>
+            </div>
+        </div>
+    </div> 
+
+
+    <div id="customHomeArea">
+        <div class="product-area-header">
+            <div class="product-area-title">OUR BEST SELLERS</div>
+        </div>
+
+        <div class="bsm-product-grid">
+            
+            <div class="bsm-product-card">
+                <div class="bsm-img-wrapper">
+                    <img src="images/pic1-1.PNG" alt="Drone 1">
+                </div>
+                <div class="bsm-info-wrapper">
+                    <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 1</span></div>
+                    <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                </div>
+                <div class="bsm-action-bar">
+                    <button class="bsm-action-btn buy-now-btn" onclick="buyNow('হাই-স্পিড ড্রোন 1', 1150, 'images/pic1-1.PNG')">
+                        <i class="fa-solid fa-bolt"></i> সরাসরি কিনুন
+                    </button>
+                    <button class="bsm-action-btn add-cart-btn" onclick="addToCart('হাই-স্পিড ড্রোন 1', 1150, 'images/pic1-1.PNG')">
+                        <i class="fa-solid fa-cart-plus"></i> কার্টে রাখুন
+                    </button>
+                </div>
+            </div>
+
+            <div class="bsm-product-card">
+                <div class="bsm-img-wrapper">
+                    <img src="images/pic1-2.PNG" alt="Drone 2">
+                </div>
+                <div class="bsm-info-wrapper">
+                    <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 2</span></div>
+                    <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                </div>
+                <div class="bsm-action-bar">
+                    <button class="bsm-action-btn buy-now-btn" onclick="buyNow('হাই-স্পিড ড্রোন 2', 1150, 'images/pic1-2.PNG')">
+                        <i class="fa-solid fa-bolt"></i> সরাসরি কিনুন
+                    </button>
+                    <button class="bsm-action-btn add-cart-btn" onclick="addToCart('হাই-স্পিড ড্রোন 2', 1150, 'images/pic1-2.PNG')">
+                        <i class="fa-solid fa-cart-plus"></i> কার্টে রাখুন
+                    </button>
+                </div>
+            </div>
+
+            <div class="bsm-product-card">
+                <div class="bsm-img-wrapper">
+                    <img src="images/pic1-3.PNG" alt="Drone 3">
+                </div>
+                <div class="bsm-info-wrapper">
+                    <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 3</span></div>
+                    <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                </div>
+                <div class="bsm-action-bar">
+                    <button class="bsm-action-btn buy-now-btn" onclick="buyNow('হাই-স্পিড ড্রোন 3', 1150, 'images/pic1-3.PNG')">
+                        <i class="fa-solid fa-bolt"></i> সরাসরি কিনুন
+                    </button>
+                    <button class="bsm-action-btn add-cart-btn" onclick="addToCart('হাই-স্পিড ড্রোন 3', 1150, 'images/pic1-3.PNG')">
+                        <i class="fa-solid fa-cart-plus"></i> কার্টে রাখুন
+                    </button>
+                </div>
+            </div>
+
+            <div class="bsm-product-card">
+                <div class="bsm-img-wrapper">
+                    <img src="images/pic1-4.PNG" alt="Drone 4">
+                </div>
+                <div class="bsm-info-wrapper">
+                    <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 4</span></div>
+                    <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                </div>
+                <div class="bsm-action-bar">
+                    <button class="bsm-action-btn buy-now-btn" onclick="buyNow('হাই-স্পিড ড্রোন 4', 1150, 'images/pic1-4.PNG')">
+                        <i class="fa-solid fa-bolt"></i> সরাসরি কিনুন
+                    </button>
+                    <button class="bsm-action-btn add-cart-btn" onclick="addToCart('হাই-স্পিড ড্রোন 4', 1150, 'images/pic1-4.PNG')">
+                        <i class="fa-solid fa-cart-plus"></i> কার্টে রাখুন
+                    </button>
+                </div>
+            </div>
+
+            <div class="bsm-product-card">
+                <div class="bsm-img-wrapper">
+                    <img src="images/pic1-1.PNG" alt="Drone 5">
+                </div>
+                <div class="bsm-info-wrapper">
+                    <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 5</span></div>
+                    <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                </div>
+                <div class="bsm-action-bar">
+                    <button class="bsm-action-btn buy-now-btn" onclick="buyNow('হাই-স্পিড ড্রোন 5', 1150, 'images/pic1-1.PNG')">
+                        <i class="fa-solid fa-bolt"></i> সরাসরি কিনুন
+                    </button>
+                    <button class="bsm-action-btn add-cart-btn" onclick="addToCart('হাই-স্পিড ড্রোন 5', 1150, 'images/pic1-1.PNG')">
+                        <i class="fa-solid fa-cart-plus"></i> কার্টে রাখুন
+                    </button>
+                </div>
+            </div>
+
+            <div class="bsm-product-card">
+                <div class="bsm-img-wrapper">
+                    <img src="images/pic1-2.PNG" alt="Drone 6">
+                </div>
+                <div class="bsm-info-wrapper">
+                    <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 6</span></div>
+                    <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                </div>
+                <div class="bsm-action-bar">
+                    <button class="bsm-action-btn buy-now-btn" onclick="buyNow('হাই-স্পিড ড্রোন 6', 1150, 'images/pic1-2.PNG')">
+                        <i class="fa-solid fa-bolt"></i> সরাসরি কিনুন
+                    </button>
+                    <button class="bsm-action-btn add-cart-btn" onclick="addToCart('হাই-স্পিড ড্রোন 6', 1150, 'images/pic1-2.PNG')">
+                        <i class="fa-solid fa-cart-plus"></i> কার্টে রাখুন
+                    </button>
+                </div>
+            </div>
+
+            <div class="bsm-product-card">
+                <div class="bsm-img-wrapper">
+                    <img src="images/pic1-3.PNG" alt="Drone 7">
+                </div>
+                <div class="bsm-info-wrapper">
+                    <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 7</span></div>
+                    <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                </div>
+                <div class="bsm-action-bar">
+                    <button class="bsm-action-btn buy-now-btn" onclick="buyNow('হাই-স্পিড ড্রোন 7', 1150, 'images/pic1-3.PNG')">
+                        <i class="fa-solid fa-bolt"></i> সরাসরি কিনুন
+                    </button>
+                    <button class="bsm-action-btn add-cart-btn" onclick="addToCart('হাই-স্পিড ড্রোন 7', 1150, 'images/pic1-3.PNG')">
+                        <i class="fa-solid fa-cart-plus"></i> কার্টে রাখুন
+                    </button>
+                </div>
+            </div>
+
+            <div class="bsm-product-card">
+                <div class="bsm-img-wrapper">
+                    <img src="images/pic1-4.PNG" alt="Drone 8">
+                </div>
+                <div class="bsm-info-wrapper">
+                    <div class="bsm-prod-name"><span>হাই-স্পিড ড্রোন 8</span></div>
+                    <div class="bsm-price-box"><span class="bsm-current-price">৳১১৫০</span></div>
+                </div>
+                <div class="bsm-action-bar">
+                    <button class="bsm-action-btn buy-now-btn" onclick="buyNow('হাই-স্পিড ড্রোন 8', 1150, 'images/pic1-4.PNG')">
+                        <i class="fa-solid fa-bolt"></i> সরাসরি কিনুন
+                    </button>
+                    <button class="bsm-action-btn add-cart-btn" onclick="addToCart('হাই-স্পিড ড্রোন 8', 1150, 'images/pic1-4.PNG')">
+                        <i class="fa-solid fa-cart-plus"></i> কার্টে রাখুন
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+    <div class="checkout-modal" id="checkoutModal">
+        <div class="checkout-content">
+            <button class="checkout-close-btn" onclick="closeCheckoutModal()"><i class="fa-solid fa-xmark"></i></button>
+            
+            <div id="mainFormArea">
+                <div class="header-box">
+                    <h2>CONFIRM YOUR ORDER</h2>
+                    <p>Best Selling Mart</p>
+                </div>
+
+                <form id="orderForm">
+                    <div class="section-box">
+                        <div class="section-title"><i class="fa-solid fa-user-check"></i> ডেলিভারি তথ্য দিন</div>
+                        
+                        <div class="input-wrapper">
+                            <label>আপনার নাম</label>
+                            <input type="text" name="name" placeholder="সম্পূর্ণ নাম লিখুন" required>
+                        </div>
+                        
+                        <div class="input-wrapper">
+                            <label>মোবাইল নাম্বার</label>
+                            <input type="tel" name="mobile" placeholder="০১৭XXXXXXXX" required>
+                        </div>
+                        
+                        <div class="input-wrapper" style="margin-bottom: 0;">
+                            <label>বিস্তারিত ঠিকানা</label>
+                            <textarea name="address" placeholder="গ্রাম/মহল্লা, থানা, জেলা" required></textarea>
+                        </div>
+                        <div class="section-box">
+    <div class="section-title"><i class="fa-solid fa-box-open"></i> আপনার অর্ডারকৃত প্রোডাক্ট</div>
+    <div id="checkoutItemsList">
+        </div>
+</div>
+                    </div>
+
+                    <div class="section-box">
+                        <div class="section-title"><i class="fa-solid fa-truck-fast"></i> ডেলিভারি চার্জ</div>
+                        <div class="delivery-grid">
+                            <label class="delivery-box active">
+                                <div class="check-icon"><i class="fa-solid fa-check"></i></div>
+                                <span class="box-title">সারাদেশে ডেলিভারি চার্জ মাত্র!</span>
+                                <span class="box-price">১৩০ ৳</span>
+                                <input type="radio" name="delivery" value="130" checked>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="submit-box">
+                        <div class="total-row">
+                            <span class="total-label">সর্বমোট বিল:</span>
+                            <span class="total-amount"><span id="checkoutFinalPrice">0</span> ৳</span>
+                        </div>
+                        <button type="submit" id="btnSubmit" class="btn-confirm">
+                            অর্ডার কনফার্ম করুন <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="successArea" class="success-box">
+                <i class="fa-regular fa-circle-check" style="font-size: 60px; color: #27AE60;"></i>
+                <h3>অর্ডার সম্পন্ন!</h3>
+                <p style="color: #666; font-size: 16px;">ধন্যবাদ। আমরা আপনার অর্ডারটি সফলভাবে রিসিভ করেছি। খুব শীঘ্রই আপনার সাথে যোগাযোগ করা হবে।</p>
+                <button class="btn-confirm" style="margin-top: 20px; background: #27AE60;" onclick="closeCheckoutModal()">বন্ধ করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cartToast" class="cart-toast">
+        <i class="fa-solid fa-circle-check"></i>
+        <span>কার্টে যোগ করা হয়েছে!</span>
+    </div>
+
+    <script src="script.js"></script>
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Best Selling Mart</h3>
+                <p>বাচ্চাদের আধুনিক ও শিক্ষণীয় খেলনার বিশ্বস্ত প্রতিষ্ঠান। আপনার সোনামণির শৈশবকে রাঙিয়ে তুলুন আমাদের আকর্ষণীয় কালেকশন দিয়ে।</p>
+            </div>
+            <div class="footer-col">
+                <h3>হেল্প ডেস্ক</h3>
+                <ul>
+                    <li><a href="#">অর্ডার ট্র্যাকিং</a></li>
+                    <li><a href="#">রিফান্ড পলিসি</a></li>
+                    <li><a href="#">শর্তাবলী ও পলিসি</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>যোগাযোগ</h3>
+                <p><i class="fa-solid fa-phone"></i> ০১৭০০-০০০০০০</p>
+                <p><i class="fa-solid fa-envelope"></i> info@bestsellingmart.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>সোশ্যাল মিডিয়া</h3>
+                <div class="social-icons">
+                    <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; ২০২৬ Best Selling Mart - সর্বস্বত্ব সংরক্ষিত।</p>
+        </div>
+    </footer>
+</body>
+</html>
